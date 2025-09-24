@@ -1,0 +1,685 @@
+[
+  {
+    "objectID": "topic_modeling.html",
+    "href": "topic_modeling.html",
+    "title": "Memahami Topic Modeling",
+    "section": "",
+    "text": "Topic modeling adalah teknik dalam Natural Language Processing (NLP) yang digunakan untuk menemukan pola tersembunyi atau “topik” dalam kumpulan dokumen teks yang besar.\n\nKonsep topic modeling adalah cara komputer untuk membaca sekumpulan besar dokumen dan secara otomatis menemukan tema-tema atau “topik” utama\n\n\nIntinya topic modeling adalah: kita ingin mendefinisikan sekumpulan teks itu secara topik\n\n\n\n\n\n\nGambar Tumpukan Koran\n\n\n\nSetumpuk artikel koran yang tidak beraturan. mengelompokkannya berdasarkan subjek. TIDAK MUNGKIN KITA akan membaca setiap artikel kata per kata.\nJika Anda melihat kata \"saham\" , \"inflasi\", dan \"investasi\", Anda akan menaruhnya di tumpukan “Ekonomi”.\n\nJika Anda melihat kata \"gol\", \"liga\", dan \"pemain\", Anda akan menaruhnya di tumpukan “Olahraga”.\n\nTopic modeling melakukan hal yang persis sama. Algoritme ini mencari kelompok kata yang sering muncul bersamaan di berbagai dokumen dan menyimpulkan bahwa kelompok kata tersebut membentuk sebuah “topik”.\n\n\n\n\n\n\n\n\n\ngraph TD\n    A[Ribuan Dokumen] --&gt; B{Bagaimana mengetahui&lt;br/&gt;topik utama tanpa&lt;br/&gt;membaca satu per satu?}\n    B --&gt; C[💡 Topic Modeling&lt;br/&gt;sebagai solusi]\n    \n    A1[Artikel berita harian] --&gt; A\n    A2[Paper akademik] --&gt; A\n    A3[Review produk] --&gt; A\n    A4[Post media sosial] --&gt; A\n    \n    C --&gt; D1[🏷️ Topik Politik]\n    C --&gt; D2[🏷️ Topik Ekonomi] \n    C --&gt; D3[🏷️ Topik Teknologi]\n    C --&gt; D4[🏷️ Topik Olahraga]\n    \n    style A fill:#e3f2fd\n    style B fill:#fff3e0\n    style C fill:#e8f5e8\n    style D1 fill:#f3e5f5\n    style D2 fill:#f3e5f5\n    style D3 fill:#f3e5f5\n    style D4 fill:#f3e5f5\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nflowchart LR\n    subgraph Input [\"📄 INPUT\"]\n        D1[\"Dokumen 1:&lt;br/&gt;Jokowi mengumumkan&lt;br/&gt;kebijakan ekonomi baru\"]\n        D2[\"Dokumen 2:&lt;br/&gt;Timnas Indonesia menang&lt;br/&gt;melawan Malaysia 3-1\"]  \n        D3[\"Dokumen 3:&lt;br/&gt;Startup AI Indonesia&lt;br/&gt;dapat funding $50M\"]\n        D4[\"Dokumen 4:&lt;br/&gt;Inflasi naik 2.5%&lt;br/&gt;bulan ini\"]\n    end\n    \n    subgraph Process [\"⚙️ TOPIC MODELING\"]\n        TM[Algoritma mencari&lt;br/&gt;pola kata-kata&lt;br/&gt;yang sering muncul&lt;br/&gt;bersamaan]\n    end\n    \n    subgraph Output [\"🏷️ TOPIK DITEMUKAN\"]\n        T1[\"🏛️ POLITIK:&lt;br/&gt;jokowi, presiden,&lt;br/&gt;pemerintah, kebijakan\"]\n        T2[\"⚽ OLAHRAGA:&lt;br/&gt;timnas, menang,&lt;br/&gt;pertandingan, skor\"]\n        T3[\"💻 TEKNOLOGI:&lt;br/&gt;startup, AI, funding,&lt;br/&gt;artificial, intelligence\"]\n        T4[\"💰 EKONOMI:&lt;br/&gt;inflasi, ekonomi, pasar,&lt;br/&gt;kenaikan, persen\"]\n    end\n    \n    Input --&gt; Process\n    Process --&gt; Output\n    \n    style Input fill:#e3f2fd\n    style Process fill:#fff3e0\n    style Output fill:#e8f5e8\n\n\n\n\n\n\n\n\n\n\nCocok untuk menganalisis kumpulan ulasan, artikel, berita, laporan\n\nTidak perlu tahu topiknya dulu, mesin akan “menemukan” topik secara otomatis\n\n\n\n\n\n\n\n\nG\n\n\n\nmoney\n\nmoney\n\n\n\nfinancial\n\nfinancial\n\n\n\nmoney--financial\n\n\n\n\nobligasi\n\nobligasi\n\n\n\nfinancial--obligasi\n\n\n\n\ndollar\n\ndollar\n\n\n\nobligasi--dollar\n\n\n\n\nkorupsi\n\nkorupsi\n\n\n\nfraud\n\nfraud\n\n\n\nkorupsi--fraud\n\n\n\n\ncases\n\ncases\n\n\n\nfraud--cases\n\n\n\n\n\n\n\n\n\n\n\n\nPerbedaan utama antara Topic Modeling (Pemodelan Topik) dan Sentiment Analysis(Analisis Sentimen) terletak pada tujuan dan output yang dihasilkan.\n\n\n\n\n\nflowchart LR\n  A1[Topic Modeling] --&gt; E1(Apa yang sedang dibicarakan?)\n  A2[Sentiment Analysis] --&gt; E2{Bagaimana perasaan mereka tentang itu?}",
+    "crumbs": [
+      "Chapter IV",
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "topic_modeling.html#analogi-sederhana-memahami-topic-modeling",
+    "href": "topic_modeling.html#analogi-sederhana-memahami-topic-modeling",
+    "title": "Memahami Topic Modeling",
+    "section": "",
+    "text": "Gambar Tumpukan Koran\n\n\n\nSetumpuk artikel koran yang tidak beraturan. mengelompokkannya berdasarkan subjek. TIDAK MUNGKIN KITA akan membaca setiap artikel kata per kata.\nJika Anda melihat kata \"saham\" , \"inflasi\", dan \"investasi\", Anda akan menaruhnya di tumpukan “Ekonomi”.\n\nJika Anda melihat kata \"gol\", \"liga\", dan \"pemain\", Anda akan menaruhnya di tumpukan “Olahraga”.\n\nTopic modeling melakukan hal yang persis sama. Algoritme ini mencari kelompok kata yang sering muncul bersamaan di berbagai dokumen dan menyimpulkan bahwa kelompok kata tersebut membentuk sebuah “topik”.",
+    "crumbs": [
+      "Chapter IV",
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "topic_modeling.html#masalah-yang-diselesaikan-topic-modeling",
+    "href": "topic_modeling.html#masalah-yang-diselesaikan-topic-modeling",
+    "title": "Memahami Topic Modeling",
+    "section": "",
+    "text": "graph TD\n    A[Ribuan Dokumen] --&gt; B{Bagaimana mengetahui&lt;br/&gt;topik utama tanpa&lt;br/&gt;membaca satu per satu?}\n    B --&gt; C[💡 Topic Modeling&lt;br/&gt;sebagai solusi]\n    \n    A1[Artikel berita harian] --&gt; A\n    A2[Paper akademik] --&gt; A\n    A3[Review produk] --&gt; A\n    A4[Post media sosial] --&gt; A\n    \n    C --&gt; D1[🏷️ Topik Politik]\n    C --&gt; D2[🏷️ Topik Ekonomi] \n    C --&gt; D3[🏷️ Topik Teknologi]\n    C --&gt; D4[🏷️ Topik Olahraga]\n    \n    style A fill:#e3f2fd\n    style B fill:#fff3e0\n    style C fill:#e8f5e8\n    style D1 fill:#f3e5f5\n    style D2 fill:#f3e5f5\n    style D3 fill:#f3e5f5\n    style D4 fill:#f3e5f5",
+    "crumbs": [
+      "Chapter IV",
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "topic_modeling.html#proses-umum-topic-modeling",
+    "href": "topic_modeling.html#proses-umum-topic-modeling",
+    "title": "Memahami Topic Modeling",
+    "section": "",
+    "text": "flowchart LR\n    subgraph Input [\"📄 INPUT\"]\n        D1[\"Dokumen 1:&lt;br/&gt;Jokowi mengumumkan&lt;br/&gt;kebijakan ekonomi baru\"]\n        D2[\"Dokumen 2:&lt;br/&gt;Timnas Indonesia menang&lt;br/&gt;melawan Malaysia 3-1\"]  \n        D3[\"Dokumen 3:&lt;br/&gt;Startup AI Indonesia&lt;br/&gt;dapat funding $50M\"]\n        D4[\"Dokumen 4:&lt;br/&gt;Inflasi naik 2.5%&lt;br/&gt;bulan ini\"]\n    end\n    \n    subgraph Process [\"⚙️ TOPIC MODELING\"]\n        TM[Algoritma mencari&lt;br/&gt;pola kata-kata&lt;br/&gt;yang sering muncul&lt;br/&gt;bersamaan]\n    end\n    \n    subgraph Output [\"🏷️ TOPIK DITEMUKAN\"]\n        T1[\"🏛️ POLITIK:&lt;br/&gt;jokowi, presiden,&lt;br/&gt;pemerintah, kebijakan\"]\n        T2[\"⚽ OLAHRAGA:&lt;br/&gt;timnas, menang,&lt;br/&gt;pertandingan, skor\"]\n        T3[\"💻 TEKNOLOGI:&lt;br/&gt;startup, AI, funding,&lt;br/&gt;artificial, intelligence\"]\n        T4[\"💰 EKONOMI:&lt;br/&gt;inflasi, ekonomi, pasar,&lt;br/&gt;kenaikan, persen\"]\n    end\n    \n    Input --&gt; Process\n    Process --&gt; Output\n    \n    style Input fill:#e3f2fd\n    style Process fill:#fff3e0\n    style Output fill:#e8f5e8",
+    "crumbs": [
+      "Chapter IV",
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "topic_modeling.html#gali-dengan-topic-modelling",
+    "href": "topic_modeling.html#gali-dengan-topic-modelling",
+    "title": "Memahami Topic Modeling",
+    "section": "",
+    "text": "Cocok untuk menganalisis kumpulan ulasan, artikel, berita, laporan\n\nTidak perlu tahu topiknya dulu, mesin akan “menemukan” topik secara otomatis\n\n\n\n\n\n\n\n\nG\n\n\n\nmoney\n\nmoney\n\n\n\nfinancial\n\nfinancial\n\n\n\nmoney--financial\n\n\n\n\nobligasi\n\nobligasi\n\n\n\nfinancial--obligasi\n\n\n\n\ndollar\n\ndollar\n\n\n\nobligasi--dollar\n\n\n\n\nkorupsi\n\nkorupsi\n\n\n\nfraud\n\nfraud\n\n\n\nkorupsi--fraud\n\n\n\n\ncases\n\ncases\n\n\n\nfraud--cases",
+    "crumbs": [
+      "Chapter IV",
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "topic_modeling.html#perbedaan-dengan-sentiment-analysis",
+    "href": "topic_modeling.html#perbedaan-dengan-sentiment-analysis",
+    "title": "Memahami Topic Modeling",
+    "section": "",
+    "text": "Perbedaan utama antara Topic Modeling (Pemodelan Topik) dan Sentiment Analysis(Analisis Sentimen) terletak pada tujuan dan output yang dihasilkan.\n\n\n\n\n\nflowchart LR\n  A1[Topic Modeling] --&gt; E1(Apa yang sedang dibicarakan?)\n  A2[Sentiment Analysis] --&gt; E2{Bagaimana perasaan mereka tentang itu?}",
+    "crumbs": [
+      "Chapter IV",
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "topic_modeling.html#referensi-utama",
+    "href": "topic_modeling.html#referensi-utama",
+    "title": "Memahami Topic Modeling",
+    "section": "Referensi Utama",
+    "text": "Referensi Utama\n\nBlei, D. M. (2012). Probabilistic topic models. Communications of the ACM, 55(4), 77-84.\nSilge, J., & Robinson, D. (2017). Text Mining with R: A Tidy Approach. O’Reilly Media.\nKherwa, P., & Bansal, P. (2020). Topic modeling: A comprehensive review. EAI Endorsed Transactions on Scalable Information Systems, 7(24).",
+    "crumbs": [
+      "Chapter IV",
+      "Topic Modeling"
+    ]
+  },
+  {
+    "objectID": "nmf_presentation.html#apa-itu-nmf-penjelasan-sederhana",
+    "href": "nmf_presentation.html#apa-itu-nmf-penjelasan-sederhana",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Apa itu NMF? Penjelasan Sederhana",
+    "text": "Apa itu NMF? Penjelasan Sederhana\nBayangkan Anda memiliki buku resep dengan 1000 resep dan 500 bahan-bahan.\n\nMatrix V = Tabel resep × bahan (1000 × 500)\nNMF memecah tabel ini menjadi 2 tabel kecil:\n\nMatrix W = Resep × Kategori masakan (1000 × 10)\n\nMatrix H = Kategori masakan × Bahan (10 × 500)\n\n\n\\[\\underbrace{V}_{1000 \\times 500} \\approx \\underbrace{W}_{1000 \\times 10} \\times \\underbrace{H}_{10 \\times 500}\\]\nW menunjukkan seberapa kuat setiap resep termasuk dalam kategori\nH menunjukkan bahan-bahan khas untuk setiap kategori"
+  },
+  {
+    "objectID": "nmf_presentation.html#mengapa-persamaan-v-w-h",
+    "href": "nmf_presentation.html#mengapa-persamaan-v-w-h",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Mengapa Persamaan V ≈ W × H?",
+    "text": "Mengapa Persamaan V ≈ W × H?\nMari kita lihat dengan contoh kecil:\nMisalnya kita punya 3 dokumen dan 4 kata:\n\\[V = \\begin{bmatrix}\n2 & 3 & 0 & 1 \\\\\n1 & 1 & 4 & 2 \\\\\n3 & 2 & 1 & 0\n\\end{bmatrix}\\]\nNMF mencari: \\[W = \\begin{bmatrix}\n0.8 & 0.1 \\\\\n0.2 & 0.9 \\\\\n0.7 & 0.2\n\\end{bmatrix}, \\quad H = \\begin{bmatrix}\n3 & 4 & 0 & 1 \\\\\n0 & 0 & 4 & 2\n\\end{bmatrix}\\]\nSehingga: \\(V \\approx W \\times H\\)\nInterpretasi: - Dokumen 1: 80% topik 1, 10% topik 2\n- Topik 1: kata 1 dan 2 dominan\n- Topik 2: kata 3 dan 4 dominan"
+  },
+  {
+    "objectID": "nmf_presentation.html#persamaan-matematika---step-by-step",
+    "href": "nmf_presentation.html#persamaan-matematika---step-by-step",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Persamaan Matematika - Step by Step",
+    "text": "Persamaan Matematika - Step by Step\n1. Objective Function (Yang ingin kita minimimalkan):\n\\[\\text{Error} = ||V - WH||^2\\]\nArtinya: “Seberapa jauh hasil perkalian WH dari data asli V?”\n2. Dalam bentuk elemen:\n\\[\\text{Error} = \\sum_{i,j} (V_{ij} - (WH)_{ij})^2\\]\nDimana \\((WH)_{ij} = \\sum_{k=1}^{r} W_{ik} \\times H_{kj}\\)\n3. Constraint (Batasan):\nSemua nilai dalam W dan H harus ≥ 0\nMengapa non-negatif? Karena: - Frekuensi kata tidak bisa negatif - Proporsi topik tidak bisa negatif - Hasil lebih mudah diinterpretasi"
+  },
+  {
+    "objectID": "nmf_presentation.html#algoritma-update---penjelasan-intuitif",
+    "href": "nmf_presentation.html#algoritma-update---penjelasan-intuitif",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Algoritma Update - Penjelasan Intuitif",
+    "text": "Algoritma Update - Penjelasan Intuitif\nNMF menggunakan Multiplicative Update Rules:\nUpdate untuk W:\n\\[W_{ik}^{\\text{new}} = W_{ik}^{\\text{old}} \\times \\frac{(VH^T)_{ik}}{(WHH^T)_{ik}}\\]\nUpdate untuk H:\n\\[H_{kj}^{\\text{new}} = H_{kj}^{\\text{old}} \\times \\frac{(W^TV)_{kj}}{(W^TWH)_{kj}}\\]\nIntuisi: - Jika \\((VH^T)_{ik} &gt; (WHH^T)_{ik}\\) → \\(W_{ik}\\) naik - Jika \\((VH^T)_{ik} &lt; (WHH^T)_{ik}\\) → \\(W_{ik}\\) turun - Algoritma otomatis menjaga nilai tetap positif!"
+  },
+  {
+    "objectID": "nmf_presentation.html#kenapa-nmf-bagus-untuk-topic-modeling",
+    "href": "nmf_presentation.html#kenapa-nmf-bagus-untuk-topic-modeling",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Kenapa NMF Bagus untuk Topic Modeling?",
+    "text": "Kenapa NMF Bagus untuk Topic Modeling?\n🎯 Keunggulan untuk Teks:\n\nNon-negatif → Cocok dengan frekuensi kata (selalu ≥ 0)\nParts-based → Setiap topik adalah “campuran kata”\nSparse → Banyak nilai mendekati 0 (realistis untuk teks)\nInterpretable → Mudah memahami topik yang dihasilkan\n\n📊 Contoh Interpretasi:\n\nMatrix W: “Dokumen tentang apa saja?”\nMatrix H: “Topik terdiri dari kata apa saja?”\n\nTopik 1: “teknologi, komputer, software, programming”\nTopik 2: “makanan, resep, masak, dapur”"
+  },
+  {
+    "objectID": "nmf_presentation.html#implementasi-sederhana---step-by-step",
+    "href": "nmf_presentation.html#implementasi-sederhana---step-by-step",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Implementasi Sederhana - Step by Step",
+    "text": "Implementasi Sederhana - Step by Step\nStep 1: Import Libraries\nimport numpy as np\nimport pandas as pd\nfrom sklearn.feature_extraction.text import CountVectorizer\nfrom sklearn.decomposition import NMF\nimport matplotlib.pyplot as plt\n\n# Contoh dokumen sederhana\ndocuments = [\n    \"kucing lucu bermain bola\",\n    \"anjing suka berlari di taman\", \n    \"mobil cepat di jalan raya\",\n    \"motor sport balap cepat\",\n    \"kucing tidur di rumah\",\n    \"anjing berlari mengejar bola\"\n]\n\nprint(\"Dokumen yang akan dianalisis:\")\nfor i, doc in enumerate(documents):\n    print(f\"{i+1}. {doc}\")\nStep 2: Buat Document-Term Matrix\n# Buat vectorizer (mengubah teks jadi angka)\nvectorizer = CountVectorizer(stop_words=None)\nX = vectorizer.fit_transform(documents)\n\nprint(f\"Shape matrix: {X.shape}\")  # (6 dokumen, n kata)\nprint(f\"Kata-kata: {vectorizer.get_feature_names_out()}\")\n\n# Lihat matrix dalam bentuk array\nX_dense = X.toarray()\ndf = pd.DataFrame(X_dense, \n                  columns=vectorizer.get_feature_names_out(),\n                  index=[f\"Doc{i+1}\" for i in range(len(documents))])\nprint(\"\\nDocument-Term Matrix:\")\nprint(df)"
+  },
+  {
+    "objectID": "nmf_presentation.html#implementasi-nmf---mari-kita-coba",
+    "href": "nmf_presentation.html#implementasi-nmf---mari-kita-coba",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Implementasi NMF - Mari Kita Coba!",
+    "text": "Implementasi NMF - Mari Kita Coba!\nStep 3: Terapkan NMF\n# Terapkan NMF dengan 2 topik\nn_topics = 2\nnmf = NMF(n_components=n_topics, random_state=42, max_iter=100)\n\n# Fit dan transform\nW = nmf.fit_transform(X)  # Dokumen × Topik\nH = nmf.components_       # Topik × Kata\n\nprint(f\"Shape W (Document-Topic): {W.shape}\")\nprint(f\"Shape H (Topic-Word): {H.shape}\")\n\n# Lihat matrix W (seberapa kuat setiap dokumen di setiap topik)\nw_df = pd.DataFrame(W, \n                    columns=[f\"Topic_{i+1}\" for i in range(n_topics)],\n                    index=[f\"Doc_{i+1}\" for i in range(len(documents))])\nprint(\"\\nMatrix W (Document-Topic Distribution):\")\nprint(w_df.round(3))\nStep 4: Interpretasi Topik\ndef show_topics(model, feature_names, n_top_words=5):\n    \"\"\"Tampilkan kata-kata teratas untuk setiap topik\"\"\"\n    \n    for topic_idx, topic in enumerate(model.components_):\n        # Ambil index kata dengan nilai tertinggi\n        top_words_idx = topic.argsort()[-n_top_words:][::-1]\n        top_words = [feature_names[i] for i in top_words_idx]\n        top_weights = topic[top_words_idx]\n        \n        print(f\"\\n📝 Topik {topic_idx + 1}:\")\n        for word, weight in zip(top_words, top_weights):\n            print(f\"  - {word}: {weight:.3f}\")\n\nfeature_names = vectorizer.get_feature_names_out()\nshow_topics(nmf, feature_names, n_top_words=3)"
+  },
+  {
+    "objectID": "nmf_presentation.html#visualisasi-hasil---membuat-grafik",
+    "href": "nmf_presentation.html#visualisasi-hasil---membuat-grafik",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Visualisasi Hasil - Membuat Grafik",
+    "text": "Visualisasi Hasil - Membuat Grafik\n# Visualisasi Document-Topic Distribution\nplt.figure(figsize=(12, 5))\n\n# Plot 1: Document-Topic Matrix\nplt.subplot(1, 2, 1)\nplt.imshow(W.T, cmap='Blues', aspect='auto')\nplt.colorbar()\nplt.title('Document-Topic Distribution')\nplt.xlabel('Documents')\nplt.ylabel('Topics')\nplt.yticks(range(n_topics), [f'Topic {i+1}' for i in range(n_topics)])\nplt.xticks(range(len(documents)), [f'Doc {i+1}' for i in range(len(documents))])\n\n# Plot 2: Topic-Word Matrix (hanya beberapa kata teratas)\nplt.subplot(1, 2, 2)\n# Ambil 8 kata dengan bobot tertinggi untuk visualisasi\ntop_words_per_topic = []\nfor topic_idx in range(n_topics):\n    top_idx = H[topic_idx].argsort()[-8:][::-1]\n    top_words_per_topic.extend(top_idx)\n\nunique_top_words = list(set(top_words_per_topic))\nH_subset = H[:, unique_top_words]\nword_labels = [feature_names[i] for i in unique_top_words]\n\nplt.imshow(H_subset, cmap='Reds', aspect='auto')\nplt.colorbar()\nplt.title('Topic-Word Distribution')\nplt.xlabel('Words')\nplt.ylabel('Topics')\nplt.yticks(range(n_topics), [f'Topic {i+1}' for i in range(n_topics)])\nplt.xticks(range(len(word_labels)), word_labels, rotation=45)\n\nplt.tight_layout()\nplt.show()"
+  },
+  {
+    "objectID": "nmf_presentation.html#contoh-real-analisis-berita",
+    "href": "nmf_presentation.html#contoh-real-analisis-berita",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Contoh Real: Analisis Berita",
+    "text": "Contoh Real: Analisis Berita\n# Dataset berita yang lebih realistis\nnews_articles = [\n    \"Presiden mengumumkan kebijakan ekonomi baru untuk meningkatkan pertumbuhan\",\n    \"Tim nasional sepak bola berhasil menang melawan lawan yang kuat\",\n    \"Teknologi artificial intelligence semakin berkembang pesat di Indonesia\", \n    \"Bursa saham mengalami kenaikan signifikan hari ini\",\n    \"Pemain bintang mencetak gol spektakuler di pertandingan final\",\n    \"Startup teknologi Indonesia raih pendanaan besar dari investor\",\n    \"Menteri keuangan bahas rencana anggaran tahun depan\",\n    \"Turnamen olahraga internasional akan diselenggarakan di Jakarta\",\n    \"Platform digital baru diluncurkan untuk membantu UMKM\",\n    \"Indeks harga saham gabungan ditutup menguat 2 persen\"\n]\n\n# Preprocessing yang lebih baik\nfrom sklearn.feature_extraction.text import TfidfVectorizer\n\n# Gunakan TF-IDF untuk hasil yang lebih baik\nvectorizer = TfidfVectorizer(\n    max_features=50,        # Ambil 50 kata paling penting\n    stop_words=None,        # Bisa tambah stopwords bahasa Indonesia\n    lowercase=True,\n    ngram_range=(1, 1)      # Hanya unigram\n)\n\nX = vectorizer.fit_transform(news_articles)\nprint(f\"Ukuran matrix: {X.shape}\")\n\n# NMF dengan 3 topik\nn_topics = 3\nnmf = NMF(n_components=n_topics, \n          random_state=42, \n          alpha=0.1,          # Sedikit regularisasi\n          l1_ratio=0.5,       # Mix L1 dan L2\n          max_iter=200)\n\nW = nmf.fit_transform(X)\nH = nmf.components_\n\nprint(\"\\n🔍 HASIL TOPIC MODELING:\")\nshow_topics(nmf, vectorizer.get_feature_names_out(), n_top_words=5)"
+  },
+  {
+    "objectID": "nmf_presentation.html#interpretasi-dan-evaluasi",
+    "href": "nmf_presentation.html#interpretasi-dan-evaluasi",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Interpretasi dan Evaluasi",
+    "text": "Interpretasi dan Evaluasi\nInterpretasi Document-Topic:\n# Lihat dokumen mana yang masuk topik mana\nw_df = pd.DataFrame(W, \n                    columns=[f\"Topik_{i+1}\" for i in range(n_topics)],\n                    index=[f\"Artikel_{i+1}\" for i in range(len(news_articles))])\n\nprint(\"\\n📊 DISTRIBUSI TOPIK PER DOKUMEN:\")\nprint(w_df.round(3))\n\n# Tentukan topik dominan untuk setiap dokumen\ndominant_topics = np.argmax(W, axis=1)\nprint(\"\\n🎯 TOPIK DOMINAN:\")\nfor i, topic in enumerate(dominant_topics):\n    print(f\"Artikel {i+1}: Topik {topic+1}\")\n    print(f\"  '{news_articles[i][:50]}...'\")\nEvaluasi Kualitas:\ndef evaluate_nmf_quality(X, W, H):\n    \"\"\"Evaluasi kualitas hasil NMF\"\"\"\n    \n    # 1. Reconstruction Error\n    X_reconstructed = W @ H\n    if hasattr(X, 'toarray'):  # Jika sparse matrix\n        X_dense = X.toarray()\n    else:\n        X_dense = X\n        \n    reconstruction_error = np.linalg.norm(X_dense - X_reconstructed, 'fro')\n    relative_error = reconstruction_error / np.linalg.norm(X_dense, 'fro')\n    \n    # 2. Sparsity (seberapa banyak nilai mendekati 0)\n    sparsity_W = np.mean(W &lt; 0.01)\n    sparsity_H = np.mean(H &lt; 0.01)\n    \n    # 3. Topic Coherence (sederhana: rata-rata bobot kata teratas)\n    coherence_scores = []\n    for topic_idx in range(H.shape[0]):\n        top_words_weights = np.sort(H[topic_idx])[-5:]  # 5 kata teratas\n        coherence_scores.append(np.mean(top_words_weights))\n    \n    return {\n        'reconstruction_error': reconstruction_error,\n        'relative_error': relative_error,\n        'sparsity_W': sparsity_W,\n        'sparsity_H': sparsity_H,\n        'avg_coherence': np.mean(coherence_scores)\n    }\n\nmetrics = evaluate_nmf_quality(X, W, H)\nprint(\"\\n📈 EVALUASI KUALITAS NMF:\")\nfor key, value in metrics.items():\n    print(f\"{key}: {value:.4f}\")"
+  },
+  {
+    "objectID": "nmf_presentation.html#parameter-tuning---mencari-hasil-terbaik",
+    "href": "nmf_presentation.html#parameter-tuning---mencari-hasil-terbaik",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Parameter Tuning - Mencari Hasil Terbaik",
+    "text": "Parameter Tuning - Mencari Hasil Terbaik\n1. Mencari Jumlah Topik Optimal:\ndef find_optimal_topics(X, max_topics=10):\n    \"\"\"Cari jumlah topik optimal berdasarkan reconstruction error\"\"\"\n    \n    errors = []\n    coherence_scores = []\n    topic_range = range(2, max_topics + 1)\n    \n    for n_topics in topic_range:\n        nmf = NMF(n_components=n_topics, random_state=42, max_iter=200)\n        W = nmf.fit_transform(X)\n        H = nmf.components_\n        \n        # Hitung error\n        metrics = evaluate_nmf_quality(X, W, H)\n        errors.append(metrics['relative_error'])\n        coherence_scores.append(metrics['avg_coherence'])\n    \n    # Plot hasil\n    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 5))\n    \n    # Plot 1: Reconstruction Error\n    ax1.plot(topic_range, errors, 'bo-')\n    ax1.set_xlabel('Jumlah Topik')\n    ax1.set_ylabel('Relative Reconstruction Error')\n    ax1.set_title('Elbow Method: Reconstruction Error')\n    ax1.grid(True)\n    \n    # Plot 2: Coherence Score\n    ax2.plot(topic_range, coherence_scores, 'ro-')\n    ax2.set_xlabel('Jumlah Topik')\n    ax2.set_ylabel('Average Coherence Score')\n    ax2.set_title('Topic Coherence vs Number of Topics')\n    ax2.grid(True)\n    \n    plt.tight_layout()\n    plt.show()\n    \n    return topic_range, errors, coherence_scores\n\n# Cari jumlah topik optimal\ntopic_range, errors, coherence_scores = find_optimal_topics(X, max_topics=8)\n2. Hyperparameter Tuning:\nfrom sklearn.model_selection import GridSearchCV\nfrom sklearn.pipeline import Pipeline\n\n# Parameter grid untuk tuning\nparam_grid = {\n    'alpha': [0.0, 0.1, 0.5],\n    'l1_ratio': [0.0, 0.5, 1.0],\n    'max_iter': [100, 200, 500]\n}\n\nbest_reconstruction_error = float('inf')\nbest_params = {}\n\nprint(\"🔧 MENCARI PARAMETER TERBAIK...\")\nfor alpha in param_grid['alpha']:\n    for l1_ratio in param_grid['l1_ratio']:\n        for max_iter in param_grid['max_iter']:\n            \n            nmf = NMF(n_components=3, \n                     alpha=alpha,\n                     l1_ratio=l1_ratio, \n                     max_iter=max_iter,\n                     random_state=42)\n            \n            try:\n                W = nmf.fit_transform(X)\n                H = nmf.components_\n                \n                metrics = evaluate_nmf_quality(X, W, H)\n                error = metrics['relative_error']\n                \n                if error &lt; best_reconstruction_error:\n                    best_reconstruction_error = error\n                    best_params = {\n                        'alpha': alpha,\n                        'l1_ratio': l1_ratio, \n                        'max_iter': max_iter,\n                        'error': error\n                    }\n                    \n            except:\n                continue\n\nprint(f\"\\n✅ PARAMETER TERBAIK: {best_params}\")"
+  },
+  {
+    "objectID": "nmf_presentation.html#studi-kasus-lengkap-analisis-review-produk",
+    "href": "nmf_presentation.html#studi-kasus-lengkap-analisis-review-produk",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Studi Kasus Lengkap: Analisis Review Produk",
+    "text": "Studi Kasus Lengkap: Analisis Review Produk\n# Simulasi review produk\nreviews = [\n    \"produk bagus kualitas sangat memuaskan pelayanan cepat\",\n    \"harga mahal tapi kualitas sebanding recommended\", \n    \"pengiriman lambat packaging kurang rapi kecewa\",\n    \"produk sesuai deskripsi kualitas oke harga terjangkau\",\n    \"pelayanan ramah fast response penjual recommended\",\n    \"barang rusak saat sampai packaging buruk mengecewakan\",\n    \"kualitas premium harga worth it sangat puas\",\n    \"pengiriman super cepat packaging rapi aman\",\n    \"produk tidak sesuai gambar kualitas mengecewakan\", \n    \"pelayanan excellent respon cepat sangat membantu\"\n]\n\nprint(\"🛍️ ANALISIS REVIEW PRODUK E-COMMERCE\")\nprint(\"=\" * 50)\n\n# Preprocessing\nvectorizer = TfidfVectorizer(\n    max_features=30,\n    ngram_range=(1, 2),  # Unigram dan bigram\n    lowercase=True\n)\n\nX = vectorizer.fit_transform(reviews)\n\n# NMF dengan parameter optimal\nnmf = NMF(n_components=3, \n          alpha=0.1, \n          l1_ratio=0.5, \n          max_iter=200,\n          random_state=42)\n\nW = nmf.fit_transform(X)\nH = nmf.components_\n\n# Tampilkan hasil\nprint(\"\\n🏷️ TOPIK YANG DITEMUKAN:\")\ntopic_labels = []\nfor topic_idx, topic in enumerate(H):\n    top_words_idx = topic.argsort()[-5:][::-1]\n    top_words = [vectorizer.get_feature_names_out()[i] for i in top_words_idx]\n    weights = topic[top_words_idx]\n    \n    print(f\"\\nTopik {topic_idx + 1}:\")\n    for word, weight in zip(top_words, weights):\n        print(f\"  • {word}: {weight:.3f}\")\n    \n    # Label topik berdasarkan kata-kata dominan\n    if any(word in ['bagus', 'kualitas', 'memuaskan', 'premium'] for word in top_words):\n        topic_labels.append(\"Kualitas Produk\")\n    elif any(word in ['pengiriman', 'cepat', 'lambat', 'packaging'] for word in top_words):\n        topic_labels.append(\"Pengiriman & Packaging\") \n    elif any(word in ['pelayanan', 'ramah', 'respon'] for word in top_words):\n        topic_labels.append(\"Pelayanan\")\n    else:\n        topic_labels.append(f\"Topik {topic_idx + 1}\")\n\nprint(f\"\\n🏷️ LABEL TOPIK: {topic_labels}\")\n\n# Klasifikasi review\nprint(\"\\n📝 KLASIFIKASI REVIEW:\")\nfor i, review in enumerate(reviews):\n    dominant_topic = np.argmax(W[i])\n    confidence = W[i, dominant_topic]\n    \n    print(f\"\\nReview {i+1}: {topic_labels[dominant_topic]} (confidence: {confidence:.3f})\")\n    print(f\"  '{review}'\")"
+  },
+  {
+    "objectID": "nmf_presentation.html#tips-praktis-untuk-topic-modeling",
+    "href": "nmf_presentation.html#tips-praktis-untuk-topic-modeling",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Tips Praktis untuk Topic Modeling",
+    "text": "Tips Praktis untuk Topic Modeling\n✅ Do’s (Yang Harus Dilakukan):\n# 1. Preprocessing yang baik\ndef preprocess_text_for_nmf(texts):\n    \"\"\"Preprocessing teks untuk NMF\"\"\"\n    from sklearn.feature_extraction.text import TfidfVectorizer\n    \n    # Gunakan TF-IDF, bukan count\n    vectorizer = TfidfVectorizer(\n        max_df=0.8,          # Buang kata yang terlalu umum\n        min_df=2,            # Buang kata yang terlalu jarang  \n        max_features=1000,   # Batasi jumlah fitur\n        ngram_range=(1, 2),  # Unigram + bigram\n        lowercase=True,\n        stop_words='english' # Atau buat stopwords bahasa Indonesia\n    )\n    \n    return vectorizer.fit_transform(texts), vectorizer\n\n# 2. Validasi dengan coherence score\ndef calculate_topic_coherence(H, vectorizer, top_n=10):\n    \"\"\"Hitung coherence score untuk evaluasi topik\"\"\"\n    feature_names = vectorizer.get_feature_names_out()\n    coherence_scores = []\n    \n    for topic_idx in range(H.shape[0]):\n        # Ambil top words\n        top_words_idx = H[topic_idx].argsort()[-top_n:][::-1]\n        top_words_weights = H[topic_idx][top_words_idx]\n        \n        # Simple coherence: rata-rata weight dari top words\n        coherence = np.mean(top_words_weights)\n        coherence_scores.append(coherence)\n    \n    return np.mean(coherence_scores)\n❌ Don’ts (Yang Harus Dihindari):\n\nJangan gunakan terlalu banyak topik untuk data kecil\nJangan lupa preprocessing (stopwords, normalisasi)\nJangan abaikan parameter tuning\nJangan interpretasi topik hanya dari 1-2 kata teratas"
+  },
+  {
+    "objectID": "nmf_presentation.html#kesimpulan-next-steps",
+    "href": "nmf_presentation.html#kesimpulan-next-steps",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Kesimpulan & Next Steps",
+    "text": "Kesimpulan & Next Steps\n🎯 Key Takeaways:\n\nNMF = Pemecahan Matrix menjadi 2 bagian yang lebih kecil\nNon-negatif = Cocok untuk data teks (frekuensi kata)\nW Matrix = Distribusi topik per dokumen\nH Matrix = Distribusi kata per topik\nInterpretable = Hasil mudah dipahami manusia\n\n📚 Untuk Belajar Lebih Lanjut:\n# Resources yang recommended:\nresources = {\n    \"Paper Asli\": \"Lee & Seung (2001) - Algorithms for NMF\",\n    \"Library\": \"scikit-learn NMF documentation\", \n    \"Dataset Practice\": \"20 Newsgroups, Reuters-21578\",\n    \"Advanced\": \"Online NMF, Kernel NMF, Semi-supervised NMF\"\n}\n\n# Latihan yang bisa dicoba:\nexercises = [\n    \"Analisis tweet tentang topik tertentu\",\n    \"Topic modeling artikel berita Indonesia\", \n    \"Clustering review produk e-commerce\",\n    \"Ekstraksi topik dari forum diskusi\"\n]\n🚀 Challenge untuk Anda:\nCoba implementasikan NMF pada dataset teks pilihan Anda dan bandingkan dengan LDA (Latent Dirichlet Allocation)!"
+  },
+  {
+    "objectID": "nmf_presentation.html#terima-kasih",
+    "href": "nmf_presentation.html#terima-kasih",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Terima Kasih! 🙏",
+    "text": "Terima Kasih! 🙏\nPertanyaan tentang NMF dan Topic Modeling?\nMari diskusi! 💬"
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/httpx-0.28.1.dist-info/licenses/LICENSE.html",
+    "href": "envku/lib/python3.13/site-packages/httpx-0.28.1.dist-info/licenses/LICENSE.html",
+    "title": "Sosial Media Analisis",
+    "section": "",
+    "text": "Copyright © 2019, Encode OSS Ltd. All rights reserved.\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\nRedistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\nRedistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\nNeither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/numpy/random/LICENSE.html",
+    "href": "envku/lib/python3.13/site-packages/numpy/random/LICENSE.html",
+    "title": "1 NCSA Open Source License",
+    "section": "",
+    "text": "This software is dual-licensed under the The University of Illinois/NCSA Open Source License (NCSA) and The 3-Clause BSD License\n\n1 NCSA Open Source License\nCopyright (c) 2019 Kevin Sheppard. All rights reserved.\nDeveloped by: Kevin Sheppard (kevin.sheppard@economics.ox.ac.uk, kevin.k.sheppard@gmail.com) http://www.kevinsheppard.com\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal with the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nRedistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimers.\nRedistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimers in the documentation and/or other materials provided with the distribution.\nNeither the names of Kevin Sheppard, nor the names of any contributors may be used to endorse or promote products derived from this Software without specific prior written permission.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE CONTRIBUTORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH THE SOFTWARE.\n\n\n2 3-Clause BSD License\nCopyright (c) 2019 Kevin Sheppard. All rights reserved.\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\nRedistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\nRedistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\nNeither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n\n\n3 Components\nMany parts of this module have been derived from original sources, often the algorithm’s designer. Component licenses are located with the component code."
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/idna-3.10.dist-info/LICENSE.html",
+    "href": "envku/lib/python3.13/site-packages/idna-3.10.dist-info/LICENSE.html",
+    "title": "Sosial Media Analisis",
+    "section": "",
+    "text": "BSD 3-Clause License\nCopyright (c) 2013-2024, Kim Davies and contributors. All rights reserved.\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\nRedistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\nRedistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\nNeither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+  },
+  {
+    "objectID": "bertopic.html#bertopic",
+    "href": "bertopic.html#bertopic",
+    "title": "berTopic",
+    "section": "berTopic",
+    "text": "berTopic\nBERTopic adalah sebuah teknik pemodelan topik (topic modeling). Ini adalah pendekatan modern yang memanfaatkan model berbasis transformer (seperti BERT) dan clustering (pengelompokan) untuk menemukan topik-topik dalam data teks.\n\n\n\n\n\n\nTip\n\n\nBERTopic menggunakan pendekatan yang berbeda dan lebih intuitif dari LDA",
+    "crumbs": [
+      "Chapter IV",
+      "BERTopic"
+    ]
+  },
+  {
+    "objectID": "bertopic.html#cara-kerja-bertopic",
+    "href": "bertopic.html#cara-kerja-bertopic",
+    "title": "berTopic",
+    "section": "Cara Kerja BERTopic",
+    "text": "Cara Kerja BERTopic\nBerbeda dengan model tradisional seperti Latent Dirichlet Allocation (LDA) yang menggunakan metode statistik untuk menemukan frekuensi kata, BERTopic menggunakan pendekatan yang berbeda dan lebih intuitif. Karena BERTopic menggunakan model berbasis transformer, ia dapat menangkap makna semantik dan konteks dari kata-kata dalam dokumen.",
+    "crumbs": [
+      "Chapter IV",
+      "BERTopic"
+    ]
+  },
+  {
+    "objectID": "bertopic.html#proses-bertopic",
+    "href": "bertopic.html#proses-bertopic",
+    "title": "berTopic",
+    "section": "Proses BERTopic",
+    "text": "Proses BERTopic\n\nMenghasilkan Embeddings: Pertama, BERTopic mengubah dokumen menjadi representasi numerik (vektor atau embedding) menggunakan model bahasa pra-terlatih (pre-trained). Langkah ini sangat penting karena embedding ini menangkap makna dan konteks yang mendasari teks, bukan hanya kata-kata yang digunakan.\nMengurangi Dimensi: Embedding awal ini sangat kompleks. Untuk mempermudah pemrosesannya, BERTopic menggunakan algoritma yang disebut UMAP (Uniform Manifold Approximation and Projection).",
+    "crumbs": [
+      "Chapter IV",
+      "BERTopic"
+    ]
+  },
+  {
+    "objectID": "bertopic.html#proses-bertopic-1",
+    "href": "bertopic.html#proses-bertopic-1",
+    "title": "berTopic",
+    "section": "Proses BERTopic",
+    "text": "Proses BERTopic\n\nMengelompokkan Dokumen (Clustering): Dengan embedding yang telah disederhanakan, BERTopic kemudian menggunakan algoritma clustering.\nMengekstrak Representasi Topik: Terakhir, BERTopic menganalisis kata-kata di dalam setiap kelompok untuk menentukan topik utamanya. Model ini menggunakan skor class-based TF-IDF (c-TF-IDF) untuk menemukan kata-kata yang paling representatif dan penting untuk setiap topik.",
+    "crumbs": [
+      "Chapter IV",
+      "BERTopic"
+    ]
+  },
+  {
+    "objectID": "bertopic.html#perbandingan-bertopic-vs.-lda",
+    "href": "bertopic.html#perbandingan-bertopic-vs.-lda",
+    "title": "berTopic",
+    "section": "Perbandingan: BERTopic vs. LDA",
+    "text": "Perbandingan: BERTopic vs. LDA\nBerikut adalah tabel perbandingan antara BERTopic dengan model tradisional seperti LDA.\n\n\n\n\n\n\n\n\nFitur\nBERTopic\nLatent Dirichlet Allocation (LDA)\n\n\n\n\nMetode Dasar\nMenggunakan embedding kontekstual (BERT) dan clustering.\nMenggunakan frekuensi kata statistik (pendekatan “bag-of-words”).",
+    "crumbs": [
+      "Chapter IV",
+      "BERTopic"
+    ]
+  },
+  {
+    "objectID": "bertopic.html#perbandingan-bertopic-vs.-lda-1",
+    "href": "bertopic.html#perbandingan-bertopic-vs.-lda-1",
+    "title": "berTopic",
+    "section": "Perbandingan: BERTopic vs. LDA",
+    "text": "Perbandingan: BERTopic vs. LDA\n\n\n\n\n\n\n\n\nFitur\nBERTopic\nLatent Dirichlet Allocation (LDA)\n\n\n\n\nKonteks\nMenangkap makna semantik dan konteks dari kata.\nMemperlakukan dokumen sebagai kumpulan kata tanpa konteks.\n\n\nJumlah Topik\nDapat secara otomatis menentukan jumlah topik yang optimal.\nMengharuskan Anda untuk menentukan jumlah topik di awal.",
+    "crumbs": [
+      "Chapter IV",
+      "BERTopic"
+    ]
+  },
+  {
+    "objectID": "bertopic.html#kesimpulan",
+    "href": "bertopic.html#kesimpulan",
+    "title": "berTopic",
+    "section": "Kesimpulan",
+    "text": "Kesimpulan\nSingkatnya, BERTopic seringkali lebih efektif dalam menemukan topik yang koheren dan bermakna karena ia memahami makna dari teks, bukan hanya sekadar kata-kata yang terkandung di dalamnya.",
+    "crumbs": [
+      "Chapter IV",
+      "BERTopic"
+    ]
+  },
+  {
+    "objectID": "nmf.html#apa-itu-nmf-penjelasan-sederhana",
+    "href": "nmf.html#apa-itu-nmf-penjelasan-sederhana",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Apa itu NMF? Penjelasan Sederhana",
+    "text": "Apa itu NMF? Penjelasan Sederhana\nNon-Negative Matrix Factorization (NMF) adalah teknik matematika yang sering dipakai untuk topic modeling dalam teks.\nBayangkan begini: Kita punya kumpulan dokumen (misalnya artikel berita). Dokumen itu bisa diubah menjadi tabel angka:\nSetiap baris = dokumen\nSetiap kolom = kata\nSetiap angka = seberapa sering kata itu muncul di dokumen tersebut",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#nmf",
+    "href": "nmf.html#nmf",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "NMF",
+    "text": "NMF\nNMF membantu dengan memecah tabel besar itu menjadi dua tabel yang lebih kecil, sehingga:\nMatriks W = menunjukkan dokumen berhubungan dengan topik apa\nMatriks H = menunjukkan kata berhubungan dengan topik apa\n\\[\\underbrace{V}_{1000 \\times 500} \\approx \\underbrace{W}_{1000 \\times 10} \\times \\underbrace{H}_{10 \\times 500}\\]",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#apa-itu-nmf-penjelasan-sederhana-1",
+    "href": "nmf.html#apa-itu-nmf-penjelasan-sederhana-1",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Apa itu NMF? Penjelasan Sederhana",
+    "text": "Apa itu NMF? Penjelasan Sederhana\nBayangkan Anda memiliki buku resep dengan 1000 resep dan 500 bahan-bahan.\n\nMatrix V = Tabel resep × bahan (1000 × 500)\nNMF memecah tabel ini menjadi 2 tabel kecil:\n\nMatrix W = Resep × Kategori masakan (1000 × 10)\n\nMatrix H = Kategori masakan × Bahan (10 × 500)\n\n\n\\[\\underbrace{V}_{1000 \\times 500} \\approx \\underbrace{W}_{1000 \\times 10} \\times \\underbrace{H}_{10 \\times 500}\\]",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#mengapa-persamaan-v-w-h",
+    "href": "nmf.html#mengapa-persamaan-v-w-h",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Mengapa Persamaan V ≈ W × H?",
+    "text": "Mengapa Persamaan V ≈ W × H?\nMari kita lihat dengan contoh kecil: Misalnya kita punya 3 dokumen dan 4 kata:\n\\[V = \\begin{bmatrix}\n2 & 3 & 0 & 1 \\\\\n1 & 1 & 4 & 2 \\\\\n3 & 2 & 1 & 0\n\\end{bmatrix}\\]\nNMF mencari: \\[W = \\begin{bmatrix}\n0.8 & 0.1 \\\\\n0.2 & 0.9 \\\\\n0.7 & 0.2\n\\end{bmatrix}, \\quad H = \\begin{bmatrix}\n3 & 4 & 0 & 1 \\\\\n0 & 0 & 4 & 2\n\\end{bmatrix}\\]",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#mengapa-persamaan-v-w-h-1",
+    "href": "nmf.html#mengapa-persamaan-v-w-h-1",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Mengapa Persamaan V ≈ W × H?",
+    "text": "Mengapa Persamaan V ≈ W × H?\n\\[V = \\begin{bmatrix}\n2 & 3 & 0 & 1 \\\\\n1 & 1 & 4 & 2 \\\\\n3 & 2 & 1 & 0\n\\end{bmatrix}\\] V = Document–Term Matrix (DTM)\nBaris = dokumen (3 dokumen)\nKolom = kata (4 kata)\nAngka = frekuensi kata dalam dokumen\n\n#Contoh:\nDokumen 1 punya 2 kali kata1, 3 kali kata2, 0 kata3, 1 kata4\nDokumen 2 punya 1 kata1, 1 kata2, 4 kata3, 2 kata4\nDokumen 3 punya 3 kata1, 2 kata2, 1 kata3, 0 kata4",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#mengapa-persamaan-v-w-h-2",
+    "href": "nmf.html#mengapa-persamaan-v-w-h-2",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Mengapa Persamaan V ≈ W × H?",
+    "text": "Mengapa Persamaan V ≈ W × H?\nNMF mencari: \\[W = \\begin{bmatrix}\n0.8 & 0.1 \\\\\n0.2 & 0.9 \\\\\n0.7 & 0.2\n\\end{bmatrix}, \\quad H = \\begin{bmatrix}\n3 & 4 & 0 & 1 \\\\\n0 & 0 & 4 & 2\n\\end{bmatrix}\\]\nW = Document–Topic Matrix\nBaris = dokumen\nKolom = topik (di sini dipilih 2 topik)\nAngka = seberapa besar dokumen tersebut terkait dengan topik\n\n#Contoh interpretasi:\nDokumen 1 = [0.8, 0.1] → lebih dekat dengan Topik 1\nDokumen 2 = [0.2, 0.9] → lebih dekat dengan Topik 2\nDokumen 3 = [0.7, 0.2] → campuran, tapi lebih mirip Topik 1",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#mengapa-persamaan-v-w-h-3",
+    "href": "nmf.html#mengapa-persamaan-v-w-h-3",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Mengapa Persamaan V ≈ W × H?",
+    "text": "Mengapa Persamaan V ≈ W × H?\nNMF mencari: \\[W = \\begin{bmatrix}\n0.8 & 0.1 \\\\\n0.2 & 0.9 \\\\\n0.7 & 0.2\n\\end{bmatrix}, \\quad H = \\begin{bmatrix}\n3 & 4 & 0 & 1 \\\\\n0 & 0 & 4 & 2\n\\end{bmatrix}\\]\n#H = Topic–Term Matrix\nBaris = topik\nKolom = kata\nAngka = seberapa penting kata itu bagi topik tertentu\n\nContoh interpretasi:\nTopik 1 → kata1 (3), kata2 (4), kata4 (1) → lebih condong ke kata1 & kata2\nTopik 2 → kata3 (4), kata4 (2) → lebih condong ke kata3",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#code-praktik-memahami-nmf",
+    "href": "nmf.html#code-praktik-memahami-nmf",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Code Praktik Memahami NMF",
+    "text": "Code Praktik Memahami NMF\n\n\nMatriks V (dokumen x kata):\n[[0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0 1 0 0]\n [1 0 0 1 0 1 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0]\n [1 0 0 0 0 0 0 0 1 0 0 0 0 1 1 0 0 0 0 0 1 0 1 0 0 0 0]\n [1 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0]\n [0 0 1 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 1 0 0 0 0 1 0 1 0]\n [0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 1 0 0 0]\n [0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1]\n [0 0 1 0 0 0 1 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 1 0 0 0]]\nDaftar kata: ['ayam' 'basket' 'bola' 'dimakan' 'dunia' 'enak' 'gawang' 'gol' 'goreng'\n 'kemarin' 'makan' 'menang' 'mencetak' 'menjual' 'nasi' 'olahraga' 'pakai'\n 'pemain' 'pertandingan' 'populer' 'restoran' 'sambal' 'sate' 'sepak'\n 'suka' 'tim' 'voli']\n\nMatriks W (dokumen-topik):\n[[0.68290912 0.        ]\n [0.68290912 0.        ]\n [0.82852082 0.        ]\n [0.59455403 0.        ]\n [0.         0.87494919]\n [0.         0.82819475]\n [0.         0.52463035]\n [0.         0.87494919]]\n\nMatriks H (topik-kata):\n[[1.06757994 0.         0.         0.34618501 0.         0.34618501\n  0.         0.         1.41376495 0.         0.64758044 0.\n  0.         0.4199995  1.11236952 0.         0.30139544 0.\n  0.         0.         0.4199995  0.30139544 0.76618451 0.\n  0.34618501 0.         0.        ]\n [0.         0.2105076  1.24496586 0.         0.33231262 0.\n  0.35107282 0.35107282 0.         0.35107282 0.         0.35107282\n  0.35107282 0.         0.         0.54282023 0.         0.35107282\n  0.35107282 0.33231262 0.         0.         0.         1.03445826\n  0.         0.35107282 0.2105076 ]]\n\nTopik 1:\n['goreng', 'nasi', 'ayam', 'sate', 'makan']\n\nTopik 2:\n['bola', 'sepak', 'olahraga', 'pemain', 'gol']",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#matriks-v-dokumen-kata",
+    "href": "nmf.html#matriks-v-dokumen-kata",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Matriks V (dokumen × kata)",
+    "text": "Matriks V (dokumen × kata)\nContoh baris:\n\n[0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0 1 0 0]\n\nArtinya:\nBaris ini = sebuah dokumen\nKolom = kata tertentu (dari daftar kata)\nAngka = jumlah kemunculan kata\n\nMisalnya daftar kata = ['ayam', 'basket', 'bola', 'dimakan', ..., 'voli']\nKolom ke-8 = \"goreng\" → nilainya 1 → kata goreng muncul sekali di dokumen ini\nKolom ke-10 = \"makan\" → nilainya 1 → kata makan muncul sekali\nKolom ke-14 = \"nasi\" → nilainya 1 → kata nasi muncul sekali\nKolom ke-22 = \"sate\" → nilainya 1 → kata sate muncul sekali\n\nJadi dokumen ini kira-kira berisi \"makan nasi goreng sate\" \n→ cocok dengan tema makanan.",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#matriks-w-dokumentopik",
+    "href": "nmf.html#matriks-w-dokumentopik",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Matriks W (dokumen–topik)",
+    "text": "Matriks W (dokumen–topik)\n[[0.6829 0.    ]\n [0.6829 0.    ]\n [0.8285 0.    ]\n [0.5946 0.    ]\n [0.     0.8749]\n [0.     0.8282]\n [0.     0.5246]\n [0.     0.8749]]\n\nInterpretasi:\nBaris = dokumen\nKolom = topik\nAngka = seberapa kuat dokumen itu terkait dengan topik tertentu\n\nContoh:\nDokumen 1–4 hanya punya angka di kolom 1 (Topik 1) → \nini adalah dokumen tentang makanan.\nDokumen 5–8 hanya punya angka di kolom 2 (Topik 2) → \nini dokumen tentang olahraga.\n\nNMF berhasil memisahkan dokumen makanan vs olahraga dengan cukup jelas.",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#matriks-h-topikkata",
+    "href": "nmf.html#matriks-h-topikkata",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Matriks H (topik–kata)",
+    "text": "Matriks H (topik–kata)\nTopik 1 (baris pertama H):\n['goreng', 'nasi', 'ayam', 'sate', 'makan']\n\nTopik 2 (baris kedua H):\n['bola', 'sepak', 'olahraga', 'mencetak', 'gol']\n\nInterpretasi:\nBaris = topik\nKolom = kata\nAngka = bobot pentingnya kata di topik tersebut\nHasilnya:\n\nTopik 1 → kata-kata pentingnya: \"goreng\", \"nasi\", \"ayam\", \"sate\", \"makan\"\n→ ini jelas menggambarkan topik makanan\nTopik 2 → kata-kata pentingnya: \"bola\", \"sepak\", \"olahraga\", \"mencetak\", \"gol\"\n→ ini jelas menggambarkan topik olahraga",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "nmf.html#kesimpulan-dari-output",
+    "href": "nmf.html#kesimpulan-dari-output",
+    "title": "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling",
+    "section": "Kesimpulan dari Output",
+    "text": "Kesimpulan dari Output\nMatriks V = data mentah (dokumen ke kata)\nMatriks W = peta dokumen ke topik\nDokumen 1–4 → makanan\nDokumen 5–8 → olahraga\nMatriks H = peta topik ke kata\nTopik 1 = makanan\nTopik 2 = olahraga\n\nJadi NMF berhasil memecah dokumen campuran menjadi 2 kelompok\ntopik yang bisa kita pahami secara manusiawi.",
+    "crumbs": [
+      "Chapter IV",
+      "NMF"
+    ]
+  },
+  {
+    "objectID": "generative_ai.html#generative-ai",
+    "href": "generative_ai.html#generative-ai",
+    "title": "AI Generative",
+    "section": "Generative AI",
+    "text": "Generative AI\n\n\n\n\n\n\nTip\n\n\nTopic Modeling dalam Generative AI merupakan bagian dari evolusi NLP.\n\n\n\n\nPada dasarnya, hubungan keduanya bisa dilihat dari dua sudut pandang:\n\n\n\n\n\n\n\nCaution\n\n\nTopic Modeling Klasik (seperti LDA) adalah Bentuk Awal dari Generative AI.\n\n\n\n\n\n\n\n\n\nCaution\n\n\nGenerative AI Modern (seperti LLMs) adalah Evolusi Canggih dari Topic Modeling.",
+    "crumbs": [
+      "Chapter IV",
+      "Generative AI"
+    ]
+  },
+  {
+    "objectID": "generative_ai.html#generative-ai-1",
+    "href": "generative_ai.html#generative-ai-1",
+    "title": "AI Generative",
+    "section": "Generative AI",
+    "text": "Generative AI",
+    "crumbs": [
+      "Chapter IV",
+      "Generative AI"
+    ]
+  },
+  {
+    "objectID": "generative_ai.html#generative-ai-2",
+    "href": "generative_ai.html#generative-ai-2",
+    "title": "AI Generative",
+    "section": "Generative AI",
+    "text": "Generative AI",
+    "crumbs": [
+      "Chapter IV",
+      "Generative AI"
+    ]
+  },
+  {
+    "objectID": "generative_ai.html#perbedaannya",
+    "href": "generative_ai.html#perbedaannya",
+    "title": "AI Generative",
+    "section": "Perbedaannya",
+    "text": "Perbedaannya\n\n\n\n\n\n\n\n\nAspek\nTopic Modeling Klasik (LDA, NMF)\nGenerative AI Modern (LLMs)\n\n\n\n\nCara Kerja\nStatistik & Probabilistik. Mencari pola kemunculan kata bersama (co-occurrence).\nDeep Learning & Kontekstual. Memahami makna kalimat dan paragraf secara mendalam.",
+    "crumbs": [
+      "Chapter IV",
+      "Generative AI"
+    ]
+  },
+  {
+    "objectID": "generative_ai.html#perbedaannya-1",
+    "href": "generative_ai.html#perbedaannya-1",
+    "title": "AI Generative",
+    "section": "Perbedaannya",
+    "text": "Perbedaannya\n\n\n\n\n\n\n\n\nAspek\nTopic Modeling Klasik (LDA, NMF)\nGenerative AI Modern (LLMs)\n\n\n\n\nOutput\nDaftar kata kunci per topik.Contoh: Topik 1: [kucing, makanan, bulu, mainan]\nDeskripsi naratif dan label topik yang koheren.Contoh: Topik 1: Perawatan Kucing Peliharaan",
+    "crumbs": [
+      "Chapter IV",
+      "Generative AI"
+    ]
+  },
+  {
+    "objectID": "generative_ai.html#perbedaannya-2",
+    "href": "generative_ai.html#perbedaannya-2",
+    "title": "AI Generative",
+    "section": "Perbedaannya",
+    "text": "Perbedaannya\n\n\n\n\n\n\n\n\nAspek\nTopic Modeling Klasik (LDA, NMF)\nGenerative AI Modern (LLMs)\n\n\n\n\nInterpretasi\nMembutuhkan manusia untuk menafsirkan arti dari sekumpulan kata kunci.\nModel dapat langsung memberikan nama atau ringkasan topik yang mudah dipahami.",
+    "crumbs": [
+      "Chapter IV",
+      "Generative AI"
+    ]
+  },
+  {
+    "objectID": "generative_ai.html#perbedaannya-3",
+    "href": "generative_ai.html#perbedaannya-3",
+    "title": "AI Generative",
+    "section": "Perbedaannya",
+    "text": "Perbedaannya\n\n\n\n\n\n\n\n\nAspek\nTopic Modeling Klasik (LDA, NMF)\nGenerative AI Modern (LLMs)\n\n\n\n\nFleksibilitas\nTerbatas untuk menemukan topik.\nSangat fleksibel. Bisa melakukan topic modeling, meringkas, menjawab pertanyaan tentang topik, bahkan membuat dokumen baru berdasarkan topik tersebut.",
+    "crumbs": [
+      "Chapter IV",
+      "Generative AI"
+    ]
+  },
+  {
+    "objectID": "generative_ai.html#generative-ai-3",
+    "href": "generative_ai.html#generative-ai-3",
+    "title": "AI Generative",
+    "section": "Generative AI",
+    "text": "Generative AI\n\nDiagram alur topic modeling dan generative AI",
+    "crumbs": [
+      "Chapter IV",
+      "Generative AI"
+    ]
+  },
+  {
+    "objectID": "generative_ai.html#generative-ai-4",
+    "href": "generative_ai.html#generative-ai-4",
+    "title": "AI Generative",
+    "section": "Generative AI",
+    "text": "Generative AI\n\n\n\nblok bangunan fundamental yang memungkinkan AI untuk belajar dari data dan kemudian menghasilkan (generate) output",
+    "crumbs": [
+      "Chapter IV",
+      "Generative AI"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Sosial Media Analisis",
+    "section": "",
+    "text": "Note\n\n\n\nThis website is under construction and will be regularly updated and extended.\n\n\nWebsite ini berisi penjelasan tentang Sosial Media Analisis Dikembangkan oleh Andi Hermanto. Github: hermantoXYZ/Sosial-Media-Analisis.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "Sosial Media Analisis",
+    "section": "",
+    "text": "Note\n\n\n\nThis website is under construction and will be regularly updated and extended.\n\n\nWebsite ini berisi penjelasan tentang Sosial Media Analisis Dikembangkan oleh Andi Hermanto. Github: hermantoXYZ/Sosial-Media-Analisis.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#project-team",
+    "href": "index.html#project-team",
+    "title": "Sosial Media Analisis",
+    "section": "1 Project team",
+    "text": "1 Project team\n\n\n\n\nAndi Hermanto\n\n\n\nAndi Hermanto Saat ini fokus dalam pengembangan Ekonomi Simulation dengan kosentrasi penelitian terkait Economic Finance and Development Finance",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#contact",
+    "href": "index.html#contact",
+    "title": "Sosial Media Analisis",
+    "section": "2 Contact",
+    "text": "2 Contact\nWe welcome any feedback. If you encounter any issues, find typos or mistakes, or have questions/thoughts on the content, please do get in touch.\n\nIf you are Github user, you can report an issue in our repository\n\nYou can also email us directly: a.hermanto@unm.ac.id",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Sosial Media Analisis",
+    "section": "3 Acknowledgements",
+    "text": "3 Acknowledgements\nThis project is developed by lecturers from the Faculty of Economics and Business, Universitas Negeri Makassar (FEB UNM), in collaboration with international researchers.\nAll errors are ours.",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/nltk-3.9.1.dist-info/AUTHORS.html",
+    "href": "envku/lib/python3.13/site-packages/nltk-3.9.1.dist-info/AUTHORS.html",
+    "title": "1 Natural Language Toolkit (NLTK) Authors",
+    "section": "",
+    "text": "Steven Bird stevenbird1@gmail.com\nEdward Loper edloper@gmail.com\nEwan Klein ewan@inf.ed.ac.uk\n\n\n\n\n\nTom Aarsen\nRami Al-Rfou’\nMark Amery\nGreg Aumann\nIvan Barria\nIngolf Becker\nYonatan Becker\nPaul Bedaride\nSteven Bethard\nRobert Berwick\nDan Blanchard\nNathan Bodenstab\nAlexander Böhm\nFrancis Bond\nPaul Bone\nJordan Boyd-Graber\nDaniel Blanchard\nPhil Blunsom\nLars Buitinck\nCristian Capdevila\nSteve Cassidy\nChen-Fu Chiang\nDmitry Chichkov\nJinyoung Choi\nAndrew Clausen\nLucas Champollion\nGraham Christensen\nTrevor Cohn\nDavid Coles\nTom Conroy https://github.com/tconroy\nClaude Coulombe\nLucas Cooper\nRobin Cooper\nChris Crowner\nJames Curran\nArthur Darcet\nDariel Dato-on\nSelina Dennis\nLeon Derczynski\nAlexis Dimitriadis\nNikhil Dinesh\nLiang Dong\nDavid Doukhan\nRebecca Dridan\nPablo Duboue\nLong Duong\nChristian Federmann\nCampion Fellin\nMichelle Fullwood\nDan Garrette\nMaciej Gawinecki\nJean Mark Gawron\nSumukh Ghodke\nYoav Goldberg\nMichael Wayne Goodman\nDougal Graham\nBrent Gray\nSimon Greenhill\nClark Grubb\nEduardo Pereira Habkost\nMasato Hagiwara\nLauri Hallila\nMichael Hansen\nYurie Hara\nWill Hardy\nTyler Hartley\nPeter Hawkins\nSaimadhav Heblikar\nFredrik Hedman\nHelder\nMichael Heilman\nOfer Helman\nChristopher Hench\nBruce Hill\nAmy Holland\nKristy Hollingshead\nMarcus Huderle\nBaden Hughes\nNancy Ide\nRebecca Ingram\nEdward Ivanovic\nThomas Jakobsen\nNick Johnson\nEric Kafe\nPiotr Kasprzyk\nAngelos Katharopoulos\nSudharshan Kaushik\nChris Koenig\nMikhail Korobov\nDenis Krusko\nIlia Kurenkov\nStefano Lattarini\nPierre-François Laquerre\nStefano Lattarini\nHaejoong Lee\nJackson Lee\nMax Leonov\nChris Liechti\nHyuckin David Lim\nTom Lippincott\nPeter Ljunglöf\nAlex Louden\nDavid Lukeš\nJoseph Lynch\nNitin Madnani\nFelipe Madrigal\nBjørn Mæland\nDean Malmgren\nChristopher Maloof\nRob Malouf\nIker Manterola\nCarl de Marcken\nMitch Marcus\nTorsten Marek\nRobert Marshall\nMarius Mather\nDuncan McGreggor\nDavid McClosky\nXinfan Meng\nDmitrijs Milajevs\nMatt Miller\nMargaret Mitchell\nTomonori Nagano\nJason Narad\nShari A’aidil Nasruddin\nLance Nathan\nMorten Neergaard\nDavid Nemeskey\nEric Nichols\nJoel Nothman\nAlireza Nourian\nAlexander Oleynikov\nPierpaolo Pantone\nTed Pedersen\nJacob Perkins\nAlberto Planas\nOndrej Platek\nAlessandro Presta\nQi Liu\nMartin Thorsen Ranang\nMichael Recachinas\nBrandon Rhodes\nJoshua Ritterman\nWill Roberts\nStuart Robinson\nCarlos Rodriguez\nLorenzo Rubio\nAlex Rudnick\nJussi Salmela\nGeoffrey Sampson\nKepa Sarasola\nKevin Scannell\nNathan Schneider\nRico Sennrich\nThomas Skardal\nEric Smith\nLynn Soe\nRob Speer\nPeter Spiller\nRichard Sproat\nCeri Stagg\nPeter Stahl\nOliver Steele\nThomas Stieglmaier\nJan Strunk\nLiling Tan\nClaire Taylor\nLouis Tiao\nSteven Tomcavage\nTiago Tresoldi\nMarcus Uneson\nYu Usami\nPetro Verkhogliad\nPeter Wang\nZhe Wang\nCharlotte Wilson\nChuck Wooters\nSteven Xu\nBeracah Yankama\nLei Ye (叶磊)\nPatrick Ye\nGeraldine Sim Wei Ying\nJason Yoder\nThomas Zieglier\n0ssifrage\nducki13\nkiwipi\nlade\nisnowfy\nonesandzeros\npquentin\nwvanlint\nÁlvaro Justen https://github.com/turicas\nbjut-hz\nSergio Oller\nIzam Mohammed https://github.com/izam-mohammed\nWill Monroe\nElijah Rippeth\nEmil Manukyan\nCasper Lehmann-Strøm\nAndrew Giel\nTanin Na Nakorn\nLinghao Zhang\nColin Carroll\nHeguang Miao\nHannah Aizenman (story645)\nGeorge Berry\nAdam Nelson\nJ Richard Snape\nAlex Constantin alex@keyworder.ch\nTsolak Ghukasyan\nPrasasto Adi\nSafwan Kamarrudin\nArthur Tilley\nVilhjalmur Thorsteinsson\nJaehoon Hwang https://github.com/jaehoonhwang\nChintan Shah https://github.com/chintanshah24\nsbagan\nZicheng Xu\nAlbert Au Yeung https://github.com/albertauyeung\nShenjian Zhao\nDeng Wang https://github.com/lmatt-bit\nAli Abdullah\nStoytcho Stoytchev\nLakhdar Benzahia\nKheireddine Abainia https://github.com/xprogramer\nYibin Lin https://github.com/yibinlin\nArtiem Krinitsyn\nBjörn Mattsson\nOleg Chislov\nPavan Gururaj Joshi https://github.com/PavanGJ\nEthan Hill https://github.com/hill1303\nVivek Lakshmanan\nSomnath Rakshit https://github.com/somnathrakshit\nAnlan Du\nPulkit Maloo https://github.com/pulkitmaloo\nBrandon M. Burroughs https://github.com/brandonmburroughs\nJohn Stewart https://github.com/free-variation\nIaroslav Tymchenko https://github.com/myproblemchild\nAleš Tamchyna\nTim Gianitsos https://github.com/timgianitsos\nPhilippe Partarrieu https://github.com/ppartarr\nAndrew Owen Martin\nAdrian Ellis https://github.com/adrianjellis\nNat Quayle Nelson https://github.com/nqnstudios\nYanpeng Zhao https://github.com/zhaoyanpeng\nMatan Rak https://github.com/matanrak\nNick Ulle https://github.com/nick-ulle\nUday Krishna https://github.com/udaykrishna\nOsman Zubair https://github.com/okz12\nViresh Gupta https://github.com/virresh\nOndřej Cífka https://github.com/cifkao\nIris X. Zhou https://github.com/irisxzhou\nDevashish Lal https://github.com/BLaZeKiLL\nGerhard Kremer https://github.com/GerhardKa\nNicolas Darr https://github.com/ndarr\nHervé Nicol https://github.com/hervenicol\nAlexandre H. T. Dias https://github.com/alexandredias3d\nDaksh Shah https://github.com/Daksh\nJacob Weightman https://github.com/jacobdweightman\nBonifacio de Oliveira https://github.com/Bonifacio2\nArmins Bagrats Stepanjans https://github.com/ab-10\nVassilis Palassopoulos https://github.com/palasso\nRam Rachum https://github.com/cool-RR\nOr Sharir https://github.com/orsharir\nDenali Molitor https://github.com/dmmolitor\nJacob Moorman https://github.com/jdmoorman\nCory Nezin https://github.com/corynezin\nMatt Chaput\nDanny Sepler https://github.com/dannysepler\nAkshita Bhagia https://github.com/AkshitaB\nPratap Yadav https://github.com/prtpydv\nHiroki Teranishi https://github.com/chantera\nRuben Cartuyvels https://github.com/rubencart\nDalton Pearson https://github.com/daltonpearson\nRobby Horvath https://github.com/robbyhorvath\nGavish Poddar https://github.com/gavishpoddar\nSaibo Geng https://github.com/Saibo-creator\nAhmet Yildirim https://github.com/RnDevelover\nYuta Nakamura https://github.com/yutanakamura-tky\nAdam Hawley https://github.com/adamjhawley\nPanagiotis Simakis https://github.com/sp1thas\nRichard Wang https://github.com/richarddwang\nAlexandre Perez-Lebel https://github.com/aperezlebel\nFernando Carranza https://github.com/fernandocar86\nMartin Kondratzky https://github.com/martinkondra\nHeungson Lee https://github.com/heungson\nM.K. Pawelkiewicz https://github.com/hamiltonianflow\nSteven Thomas Smith https://github.com/essandess\nJan Lennartz https://github.com/Madnex\nTim Sockel https://github.com/TiMauzi\nAkihiro Yamazaki https://github.com/zakkie\nRon Urbach https://github.com/sharpblade4\nVivek Kalyan https://github.com/vivekkalyan\nTom Strange https://github.com/strangetom\n\n\n\n\n\n\n\nMartin Porter\nVivake Gupta\nBarry Wilkins\nHiranmay Ghosh\nChris Emerson\n\n\n\n\n\nAssem Chelli\nAbdelkrim Aries\nLakhdar Benzahia"
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/nltk-3.9.1.dist-info/AUTHORS.html#original-authors",
+    "href": "envku/lib/python3.13/site-packages/nltk-3.9.1.dist-info/AUTHORS.html#original-authors",
+    "title": "1 Natural Language Toolkit (NLTK) Authors",
+    "section": "",
+    "text": "Steven Bird stevenbird1@gmail.com\nEdward Loper edloper@gmail.com\nEwan Klein ewan@inf.ed.ac.uk"
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/nltk-3.9.1.dist-info/AUTHORS.html#contributors",
+    "href": "envku/lib/python3.13/site-packages/nltk-3.9.1.dist-info/AUTHORS.html#contributors",
+    "title": "1 Natural Language Toolkit (NLTK) Authors",
+    "section": "",
+    "text": "Tom Aarsen\nRami Al-Rfou’\nMark Amery\nGreg Aumann\nIvan Barria\nIngolf Becker\nYonatan Becker\nPaul Bedaride\nSteven Bethard\nRobert Berwick\nDan Blanchard\nNathan Bodenstab\nAlexander Böhm\nFrancis Bond\nPaul Bone\nJordan Boyd-Graber\nDaniel Blanchard\nPhil Blunsom\nLars Buitinck\nCristian Capdevila\nSteve Cassidy\nChen-Fu Chiang\nDmitry Chichkov\nJinyoung Choi\nAndrew Clausen\nLucas Champollion\nGraham Christensen\nTrevor Cohn\nDavid Coles\nTom Conroy https://github.com/tconroy\nClaude Coulombe\nLucas Cooper\nRobin Cooper\nChris Crowner\nJames Curran\nArthur Darcet\nDariel Dato-on\nSelina Dennis\nLeon Derczynski\nAlexis Dimitriadis\nNikhil Dinesh\nLiang Dong\nDavid Doukhan\nRebecca Dridan\nPablo Duboue\nLong Duong\nChristian Federmann\nCampion Fellin\nMichelle Fullwood\nDan Garrette\nMaciej Gawinecki\nJean Mark Gawron\nSumukh Ghodke\nYoav Goldberg\nMichael Wayne Goodman\nDougal Graham\nBrent Gray\nSimon Greenhill\nClark Grubb\nEduardo Pereira Habkost\nMasato Hagiwara\nLauri Hallila\nMichael Hansen\nYurie Hara\nWill Hardy\nTyler Hartley\nPeter Hawkins\nSaimadhav Heblikar\nFredrik Hedman\nHelder\nMichael Heilman\nOfer Helman\nChristopher Hench\nBruce Hill\nAmy Holland\nKristy Hollingshead\nMarcus Huderle\nBaden Hughes\nNancy Ide\nRebecca Ingram\nEdward Ivanovic\nThomas Jakobsen\nNick Johnson\nEric Kafe\nPiotr Kasprzyk\nAngelos Katharopoulos\nSudharshan Kaushik\nChris Koenig\nMikhail Korobov\nDenis Krusko\nIlia Kurenkov\nStefano Lattarini\nPierre-François Laquerre\nStefano Lattarini\nHaejoong Lee\nJackson Lee\nMax Leonov\nChris Liechti\nHyuckin David Lim\nTom Lippincott\nPeter Ljunglöf\nAlex Louden\nDavid Lukeš\nJoseph Lynch\nNitin Madnani\nFelipe Madrigal\nBjørn Mæland\nDean Malmgren\nChristopher Maloof\nRob Malouf\nIker Manterola\nCarl de Marcken\nMitch Marcus\nTorsten Marek\nRobert Marshall\nMarius Mather\nDuncan McGreggor\nDavid McClosky\nXinfan Meng\nDmitrijs Milajevs\nMatt Miller\nMargaret Mitchell\nTomonori Nagano\nJason Narad\nShari A’aidil Nasruddin\nLance Nathan\nMorten Neergaard\nDavid Nemeskey\nEric Nichols\nJoel Nothman\nAlireza Nourian\nAlexander Oleynikov\nPierpaolo Pantone\nTed Pedersen\nJacob Perkins\nAlberto Planas\nOndrej Platek\nAlessandro Presta\nQi Liu\nMartin Thorsen Ranang\nMichael Recachinas\nBrandon Rhodes\nJoshua Ritterman\nWill Roberts\nStuart Robinson\nCarlos Rodriguez\nLorenzo Rubio\nAlex Rudnick\nJussi Salmela\nGeoffrey Sampson\nKepa Sarasola\nKevin Scannell\nNathan Schneider\nRico Sennrich\nThomas Skardal\nEric Smith\nLynn Soe\nRob Speer\nPeter Spiller\nRichard Sproat\nCeri Stagg\nPeter Stahl\nOliver Steele\nThomas Stieglmaier\nJan Strunk\nLiling Tan\nClaire Taylor\nLouis Tiao\nSteven Tomcavage\nTiago Tresoldi\nMarcus Uneson\nYu Usami\nPetro Verkhogliad\nPeter Wang\nZhe Wang\nCharlotte Wilson\nChuck Wooters\nSteven Xu\nBeracah Yankama\nLei Ye (叶磊)\nPatrick Ye\nGeraldine Sim Wei Ying\nJason Yoder\nThomas Zieglier\n0ssifrage\nducki13\nkiwipi\nlade\nisnowfy\nonesandzeros\npquentin\nwvanlint\nÁlvaro Justen https://github.com/turicas\nbjut-hz\nSergio Oller\nIzam Mohammed https://github.com/izam-mohammed\nWill Monroe\nElijah Rippeth\nEmil Manukyan\nCasper Lehmann-Strøm\nAndrew Giel\nTanin Na Nakorn\nLinghao Zhang\nColin Carroll\nHeguang Miao\nHannah Aizenman (story645)\nGeorge Berry\nAdam Nelson\nJ Richard Snape\nAlex Constantin alex@keyworder.ch\nTsolak Ghukasyan\nPrasasto Adi\nSafwan Kamarrudin\nArthur Tilley\nVilhjalmur Thorsteinsson\nJaehoon Hwang https://github.com/jaehoonhwang\nChintan Shah https://github.com/chintanshah24\nsbagan\nZicheng Xu\nAlbert Au Yeung https://github.com/albertauyeung\nShenjian Zhao\nDeng Wang https://github.com/lmatt-bit\nAli Abdullah\nStoytcho Stoytchev\nLakhdar Benzahia\nKheireddine Abainia https://github.com/xprogramer\nYibin Lin https://github.com/yibinlin\nArtiem Krinitsyn\nBjörn Mattsson\nOleg Chislov\nPavan Gururaj Joshi https://github.com/PavanGJ\nEthan Hill https://github.com/hill1303\nVivek Lakshmanan\nSomnath Rakshit https://github.com/somnathrakshit\nAnlan Du\nPulkit Maloo https://github.com/pulkitmaloo\nBrandon M. Burroughs https://github.com/brandonmburroughs\nJohn Stewart https://github.com/free-variation\nIaroslav Tymchenko https://github.com/myproblemchild\nAleš Tamchyna\nTim Gianitsos https://github.com/timgianitsos\nPhilippe Partarrieu https://github.com/ppartarr\nAndrew Owen Martin\nAdrian Ellis https://github.com/adrianjellis\nNat Quayle Nelson https://github.com/nqnstudios\nYanpeng Zhao https://github.com/zhaoyanpeng\nMatan Rak https://github.com/matanrak\nNick Ulle https://github.com/nick-ulle\nUday Krishna https://github.com/udaykrishna\nOsman Zubair https://github.com/okz12\nViresh Gupta https://github.com/virresh\nOndřej Cífka https://github.com/cifkao\nIris X. Zhou https://github.com/irisxzhou\nDevashish Lal https://github.com/BLaZeKiLL\nGerhard Kremer https://github.com/GerhardKa\nNicolas Darr https://github.com/ndarr\nHervé Nicol https://github.com/hervenicol\nAlexandre H. T. Dias https://github.com/alexandredias3d\nDaksh Shah https://github.com/Daksh\nJacob Weightman https://github.com/jacobdweightman\nBonifacio de Oliveira https://github.com/Bonifacio2\nArmins Bagrats Stepanjans https://github.com/ab-10\nVassilis Palassopoulos https://github.com/palasso\nRam Rachum https://github.com/cool-RR\nOr Sharir https://github.com/orsharir\nDenali Molitor https://github.com/dmmolitor\nJacob Moorman https://github.com/jdmoorman\nCory Nezin https://github.com/corynezin\nMatt Chaput\nDanny Sepler https://github.com/dannysepler\nAkshita Bhagia https://github.com/AkshitaB\nPratap Yadav https://github.com/prtpydv\nHiroki Teranishi https://github.com/chantera\nRuben Cartuyvels https://github.com/rubencart\nDalton Pearson https://github.com/daltonpearson\nRobby Horvath https://github.com/robbyhorvath\nGavish Poddar https://github.com/gavishpoddar\nSaibo Geng https://github.com/Saibo-creator\nAhmet Yildirim https://github.com/RnDevelover\nYuta Nakamura https://github.com/yutanakamura-tky\nAdam Hawley https://github.com/adamjhawley\nPanagiotis Simakis https://github.com/sp1thas\nRichard Wang https://github.com/richarddwang\nAlexandre Perez-Lebel https://github.com/aperezlebel\nFernando Carranza https://github.com/fernandocar86\nMartin Kondratzky https://github.com/martinkondra\nHeungson Lee https://github.com/heungson\nM.K. Pawelkiewicz https://github.com/hamiltonianflow\nSteven Thomas Smith https://github.com/essandess\nJan Lennartz https://github.com/Madnex\nTim Sockel https://github.com/TiMauzi\nAkihiro Yamazaki https://github.com/zakkie\nRon Urbach https://github.com/sharpblade4\nVivek Kalyan https://github.com/vivekkalyan\nTom Strange https://github.com/strangetom"
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/nltk-3.9.1.dist-info/AUTHORS.html#others-whose-work-weve-taken-and-included-in-nltk-but-who-didnt-directly-contribute-it",
+    "href": "envku/lib/python3.13/site-packages/nltk-3.9.1.dist-info/AUTHORS.html#others-whose-work-weve-taken-and-included-in-nltk-but-who-didnt-directly-contribute-it",
+    "title": "1 Natural Language Toolkit (NLTK) Authors",
+    "section": "",
+    "text": "Martin Porter\nVivake Gupta\nBarry Wilkins\nHiranmay Ghosh\nChris Emerson\n\n\n\n\n\nAssem Chelli\nAbdelkrim Aries\nLakhdar Benzahia"
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/httpcore-1.0.9.dist-info/licenses/LICENSE.html",
+    "href": "envku/lib/python3.13/site-packages/httpcore-1.0.9.dist-info/licenses/LICENSE.html",
+    "title": "Sosial Media Analisis",
+    "section": "",
+    "text": "Copyright © 2020, Encode OSS Ltd. All rights reserved.\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\nRedistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\nRedistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\nNeither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/soupsieve-2.8.dist-info/licenses/LICENSE.html",
+    "href": "envku/lib/python3.13/site-packages/soupsieve-2.8.dist-info/licenses/LICENSE.html",
+    "title": "Sosial Media Analisis",
+    "section": "",
+    "text": "MIT License\nCopyright (c) 2018 - 2025 Isaac Muse isaacmuse@gmail.com\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+  },
+  {
+    "objectID": "envku/lib/python3.13/site-packages/pyzmq-27.1.0.dist-info/licenses/LICENSE.html",
+    "href": "envku/lib/python3.13/site-packages/pyzmq-27.1.0.dist-info/licenses/LICENSE.html",
+    "title": "Sosial Media Analisis",
+    "section": "",
+    "text": "BSD 3-Clause License\nCopyright (c) 2009-2012, Brian Granger, Min Ragan-Kelley\nAll rights reserved.\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\nRedistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\nRedistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\nNeither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+  },
+  {
+    "objectID": "lda.html#apa-itu-topic-modeling",
+    "href": "lda.html#apa-itu-topic-modeling",
+    "title": "Modeling dengan Latent Dirichlet Allocation (LDA)",
+    "section": "Apa itu Topic Modeling?",
+    "text": "Apa itu Topic Modeling?\nTopic modeling adalah teknik dalam Natural Language Processing (NLP) yang digunakan untuk menemukan pola tersembunyi atau “topik” dalam kumpulan dokumen teks yang besar.\n\nIntinya topik modeling adalah kita ingin mendifine sekumpulan teks itu secara topik akan membahasa apa",
+    "crumbs": [
+      "Chapter IV",
+      "LDA"
+    ]
+  },
+  {
+    "objectID": "lda.html#catatan-penting",
+    "href": "lda.html#catatan-penting",
+    "title": "Modeling dengan Latent Dirichlet Allocation (LDA)",
+    "section": "Catatan Penting",
+    "text": "Catatan Penting\n\n\n\n\n\n\nTip\n\n\nSebelum masuk ke LDA, telah memahami apa itu Topik Modeling di previous chapter Topic Modeling LDA adalah salah satu algoritma topic modeling yang paling populer dan banyak digunakan dalam berbagai hal..Studi kasus dalam pertemuan sebelumnya..",
+    "crumbs": [
+      "Chapter IV",
+      "LDA"
+    ]
+  },
+  {
+    "objectID": "lda.html#mengapa-lda-penting",
+    "href": "lda.html#mengapa-lda-penting",
+    "title": "Modeling dengan Latent Dirichlet Allocation (LDA)",
+    "section": "Mengapa LDA Penting?",
+    "text": "Mengapa LDA Penting?\nLDA adalah salah satu algoritma topic modeling yang paling populer dan banyak digunakan dalam:\n\n\n\n\n\ngraph LR\n  style A fill:#f9f,stroke:#333,stroke-width:1px\n  A[\"&lt;b&gt;Mengapa LDA Penting?&lt;/b&gt;\"]\n\n  A --&gt; B[Analisis media sosial&lt;br/&gt;&lt;i&gt;menemukan trending topics&lt;/i&gt;]\n  A --&gt; C[Riset akademik&lt;br/&gt;&lt;i&gt;menganalisis literatur penelitian&lt;/i&gt;]\n  A --&gt; D[Business intelligence&lt;br/&gt;&lt;i&gt;memahami feedback pelanggan&lt;/i&gt;]\n  A --&gt; E[Digital humanities&lt;br/&gt;&lt;i&gt;menganalisis dokumen sejarah&lt;/i&gt;]\n\n  classDef center fill:#ffd,stroke:#333,stroke-width:1px;\n  class A center;\n  class B center;\n  class C center;\n  class D center;\n  class E center;",
+    "crumbs": [
+      "Chapter IV",
+      "LDA"
+    ]
+  },
+  {
+    "objectID": "lda.html#latent-dirichlet-allocation-lda",
+    "href": "lda.html#latent-dirichlet-allocation-lda",
+    "title": "Modeling dengan Latent Dirichlet Allocation (LDA)",
+    "section": "Latent Dirichlet Allocation (LDA)",
+    "text": "Latent Dirichlet Allocation (LDA)\nAlgoritma unsupervised yang mencoba menemukan grup kata yang sering muncul bersama.\nKonsep Utama\n\nMembagi dokumen menjadi beberapa topik\nTiap topik terdiri dari kata-kata kunci\n\nContoh topik:\n- Topik 1: Money, Financial, Rupiah, Dollar, Euro\n- Topik 2: Corruption, Fraud, Cases",
+    "crumbs": [
+      "Chapter IV",
+      "LDA"
+    ]
+  },
+  {
+    "objectID": "lda.html#tools-untuk-lda",
+    "href": "lda.html#tools-untuk-lda",
+    "title": "Modeling dengan Latent Dirichlet Allocation (LDA)",
+    "section": "Tools untuk LDA",
+    "text": "Tools untuk LDA\nGensim → library Python untuk NLP & topic modeling\npyLDAvis → untuk memvisualisasikan hasil LDA\n\n\n\n\n\n\n\nG\n\n\n\nmoney\n\nmoney\n\n\n\nfinancial\n\nfinancial\n\n\n\nmoney--financial\n\n\n\n\nobligasi\n\nobligasi\n\n\n\nfinancial--obligasi\n\n\n\n\ndollar\n\ndollar\n\n\n\nobligasi--dollar\n\n\n\n\nkorupsi\n\nkorupsi\n\n\n\nfraud\n\nfraud\n\n\n\nkorupsi--fraud\n\n\n\n\ncases\n\ncases\n\n\n\nfraud--cases",
+    "crumbs": [
+      "Chapter IV",
+      "LDA"
+    ]
+  },
+  {
+    "objectID": "lda.html#dataset-untuk-praktik",
+    "href": "lda.html#dataset-untuk-praktik",
+    "title": "Modeling dengan Latent Dirichlet Allocation (LDA)",
+    "section": "Dataset untuk Praktik",
+    "text": "Dataset untuk Praktik\nLDA Link",
+    "crumbs": [
+      "Chapter IV",
+      "LDA"
+    ]
+  }
+]
