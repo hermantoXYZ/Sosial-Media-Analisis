@@ -1,0 +1,80 @@
+---
+title: "Modeling dengan Latent Dirichlet Allocation (LDA)"
+format:
+  revealjs:
+    incremental: true   
+    code-block-height: 750px
+    progress: false
+    history: true
+    chalkboard: true
+---
+
+## Apa itu Topic Modeling? {.unnumbered}
+
+**Topic modeling** adalah teknik dalam *Natural Language Processing* (NLP) yang digunakan untuk menemukan pola tersembunyi atau "topik" dalam kumpulan dokumen teks yang besar.
+
+> Intinya topik `modeling` adalah kita ingin mendifine sekumpulan teks itu secara topik akan membahasa apa 
+
+
+## Catatan Penting
+
+::: {.callout-tip}
+Sebelum masuk ke LDA, telah memahami apa itu **Topik Modeling** di previous chapter [Topic Modeling](topic_modeling.qmd)
+LDA adalah salah satu algoritma topic modeling yang paling populer dan banyak digunakan dalam berbagai hal..Studi kasus dalam pertemuan sebelumnya..
+:::
+
+## Mengapa LDA Penting? {.unnumbered}
+LDA adalah salah satu algoritma topic modeling yang paling populer dan banyak digunakan dalam:
+```{mermaid}
+graph LR
+  style A fill:#f9f,stroke:#333,stroke-width:1px
+  A["<b>Mengapa LDA Penting?</b>"]
+
+  A --> B[Analisis media sosial<br/><i>menemukan trending topics</i>]
+  A --> C[Riset akademik<br/><i>menganalisis literatur penelitian</i>]
+  A --> D[Business intelligence<br/><i>memahami feedback pelanggan</i>]
+  A --> E[Digital humanities<br/><i>menganalisis dokumen sejarah</i>]
+
+  classDef center fill:#ffd,stroke:#333,stroke-width:1px;
+  class A center;
+  class B center;
+  class C center;
+  class D center;
+  class E center;
+```
+---
+
+## Latent Dirichlet Allocation (LDA) {.unnumbered}
+Algoritma **unsupervised** yang mencoba menemukan **grup kata yang sering muncul bersama**.
+
+### Konsep Utama
+
+> Membagi dokumen menjadi beberapa topik  
+> Tiap topik terdiri dari **kata-kata kunci**  
+
+Contoh topik:  
+- **Topik 1:** Money, Financial, Rupiah, Dollar, Euro  
+- **Topik 2:** Corruption, Fraud, Cases  
+
+---
+
+## Tools untuk LDA
+
+ **Gensim** → library Python untuk NLP & topic modeling  
+ **pyLDAvis** → untuk memvisualisasikan hasil LDA  
+
+```{dot}
+graph G {
+  layout=neato
+  money -- financial;
+  financial -- obligasi;
+  obligasi -- dollar;
+  korupsi -- fraud
+  fraud -- cases
+}
+```
+
+
+## Dataset untuk Praktik
+[LDA Link](https://drive.google.com/drive/folders/1JVzyEEFzd_MNQ2uXCPJ_Qv0ZJ6fJQt_A)
+![20 Newsgroups](/ai5.png)

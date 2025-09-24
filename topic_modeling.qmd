@@ -1,0 +1,146 @@
+---
+title: "Memahami Topic Modeling"
+author: "Andi Hermanto"
+date: "2023-06-25"
+format: html
+number-sections: false
+toc: true
+---
+
+# Apa itu Topic Modeling? {.unnumbered}
+
+**Topic modeling** adalah teknik dalam *Natural Language Processing* (NLP) yang digunakan untuk menemukan pola tersembunyi atau "topik" dalam kumpulan dokumen teks yang besar.
+
+> Konsep topic modeling adalah cara komputer untuk membaca sekumpulan besar dokumen dan secara otomatis menemukan tema-tema atau "topik" utama
+
+> **Intinya topic modeling adalah**: kita ingin mendefinisikan sekumpulan teks itu secara topik
+
+
+##  Analogi Sederhana Memahami Topic Modeling {.unnumbered}
+
+![Gambar Tumpukan Koran](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8f5lcSskuvXepni9_sGb9rrVVvFB5MPGv_VKjpNY96XkliUZuzebX45UoNMBu2oRVAQg&usqp=CAU)
+
+- Setumpuk artikel koran yang tidak beraturan. mengelompokkannya berdasarkan subjek. TIDAK MUNGKIN KITA akan membaca setiap artikel kata per kata.
+
+- Jika Anda melihat kata `"saham"` , `"inflasi"`, dan `"investasi"`, Anda akan menaruhnya di tumpukan "Ekonomi".
+
+Jika Anda melihat kata `"gol"`, `"liga"`, dan `"pemain"`, Anda akan menaruhnya di tumpukan "Olahraga".
+
+- Topic modeling melakukan hal yang persis sama. Algoritme ini mencari kelompok kata yang sering muncul bersamaan di berbagai dokumen dan menyimpulkan bahwa kelompok kata tersebut membentuk sebuah "topik".
+
+## Masalah yang Diselesaikan Topic Modeling {.unnumbered}
+
+```{mermaid}
+graph TD
+    A[Ribuan Dokumen] --> B{Bagaimana mengetahui<br/>topik utama tanpa<br/>membaca satu per satu?}
+    B --> C[💡 Topic Modeling<br/>sebagai solusi]
+    
+    A1[Artikel berita harian] --> A
+    A2[Paper akademik] --> A
+    A3[Review produk] --> A
+    A4[Post media sosial] --> A
+    
+    C --> D1[🏷️ Topik Politik]
+    C --> D2[🏷️ Topik Ekonomi] 
+    C --> D3[🏷️ Topik Teknologi]
+    C --> D4[🏷️ Topik Olahraga]
+    
+    style A fill:#e3f2fd
+    style B fill:#fff3e0
+    style C fill:#e8f5e8
+    style D1 fill:#f3e5f5
+    style D2 fill:#f3e5f5
+    style D3 fill:#f3e5f5
+    style D4 fill:#f3e5f5
+```
+
+---
+
+## Proses Umum Topic Modeling
+
+```{mermaid}
+flowchart LR
+    subgraph Input ["📄 INPUT"]
+        D1["Dokumen 1:<br/>Jokowi mengumumkan<br/>kebijakan ekonomi baru"]
+        D2["Dokumen 2:<br/>Timnas Indonesia menang<br/>melawan Malaysia 3-1"]  
+        D3["Dokumen 3:<br/>Startup AI Indonesia<br/>dapat funding $50M"]
+        D4["Dokumen 4:<br/>Inflasi naik 2.5%<br/>bulan ini"]
+    end
+    
+    subgraph Process ["⚙️ TOPIC MODELING"]
+        TM[Algoritma mencari<br/>pola kata-kata<br/>yang sering muncul<br/>bersamaan]
+    end
+    
+    subgraph Output ["🏷️ TOPIK DITEMUKAN"]
+        T1["🏛️ POLITIK:<br/>jokowi, presiden,<br/>pemerintah, kebijakan"]
+        T2["⚽ OLAHRAGA:<br/>timnas, menang,<br/>pertandingan, skor"]
+        T3["💻 TEKNOLOGI:<br/>startup, AI, funding,<br/>artificial, intelligence"]
+        T4["💰 EKONOMI:<br/>inflasi, ekonomi, pasar,<br/>kenaikan, persen"]
+    end
+    
+    Input --> Process
+    Process --> Output
+    
+    style Input fill:#e3f2fd
+    style Process fill:#fff3e0
+    style Output fill:#e8f5e8
+```
+
+
+## Gali dengan Topic Modelling
+
+1. Cocok untuk **menganalisis kumpulan** ulasan, artikel, berita, laporan  
+2. Tidak perlu tahu topiknya dulu, mesin akan *"menemukan"* topik secara otomatis  
+
+
+
+```{dot}
+graph G {
+  layout=neato
+  money -- financial;
+  financial -- obligasi;
+  obligasi -- dollar;
+  korupsi -- fraud
+  fraud -- cases
+}
+```
+
+## Perbedaan dengan Sentiment Analysis
+Perbedaan utama antara `Topic Modeling` (Pemodelan Topik) dan `Sentiment Analysis `(Analisis Sentimen) terletak pada tujuan dan output yang dihasilkan.
+
+```{mermaid}
+flowchart LR
+  A1[Topic Modeling] --> E1(Apa yang sedang dibicarakan?)
+  A2[Sentiment Analysis] --> E2{Bagaimana perasaan mereka tentang itu?}
+```
+
+# Algoritma Topic Modeling
+Secara sederhana, Topic Modeling adalah prosesnya, sedangkan Algoritma adalah mesin yang menjalankan proses tersebut.
+
+Beberapa algoritma Topic Modeling yang umum digunakan:
+
+1. [Latent Dirichlet Allocation (LDA)](/lda.qmd)
+2. [Non-Negative Matrix Factorization (NMF)](/nmf.qmd)
+3. [BertTopic](/bertopic.qmd)
+
+# Kesimpulan {.unnumbered}
+
+Topic modeling adalah teknik yang powerful untuk:
+
+1. **Mengorganisir dokumen besar** secara otomatis
+2. **Menemukan pola tersembunyi** dalam teks
+3. **Memahami struktur konten** tanpa membaca manual
+4. **Mendukung analisis** di berbagai domain
+
+::: {.callout-important}
+## Poin Penting
+Topic modeling bukan magic solution! Hasil yang baik membutuhkan pemahaman domain, preprocessing yang tepat, dan interpretasi yang hati-hati.
+:::
+
+---
+
+## Referensi Utama
+
+1. **Blei, D. M.** (2012). Probabilistic topic models. *Communications of the ACM*, 55(4), 77-84.
+2. **Silge, J., & Robinson, D.** (2017). *Text Mining with R: A Tidy Approach*. O'Reilly Media.
+3. **Kherwa, P., & Bansal, P.** (2020). Topic modeling: A comprehensive review. *EAI Endorsed Transactions on Scalable Information Systems*, 7(24).

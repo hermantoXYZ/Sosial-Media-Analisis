@@ -1,0 +1,270 @@
+---
+title: "Non-Negative Matrix Factorization (NMF) untuk Topic Modeling"
+format:
+  revealjs:
+    incremental: true   
+    code-block-height: 750px
+    progress: false
+    history: true
+    chalkboard: true
+---
+
+## Apa itu NMF? Penjelasan Sederhana {.unnumbered}
+
+Non-Negative Matrix Factorization (NMF) adalah teknik matematika yang sering dipakai untuk topic modeling dalam teks.
+
+_Bayangkan begini:_
+Kita punya kumpulan dokumen (misalnya artikel berita). Dokumen itu bisa diubah menjadi tabel angka:
+
+```{text}
+Setiap baris = dokumen
+Setiap kolom = kata
+Setiap angka = seberapa sering kata itu muncul di dokumen tersebut
+```
+
+## NMF
+NMF membantu dengan memecah tabel besar itu menjadi dua tabel yang lebih kecil, sehingga:
+```{text}
+Matriks W = menunjukkan dokumen berhubungan dengan topik apa
+Matriks H = menunjukkan kata berhubungan dengan topik apa
+```
+$$\underbrace{V}_{1000 \times 500} \approx \underbrace{W}_{1000 \times 10} \times \underbrace{H}_{10 \times 500}$$
+
+
+## Apa itu NMF? Penjelasan Sederhana {.unnumbered}
+
+Bayangkan Anda memiliki **buku resep** dengan 1000 resep dan 500 bahan-bahan.
+
+- **Matrix V** = Tabel resep × bahan (1000 × 500)
+- **NMF** memecah tabel ini menjadi 2 tabel kecil:
+  - **Matrix W** = Resep × Kategori masakan (1000 × 10)  
+  - **Matrix H** = Kategori masakan × Bahan (10 × 500)
+
+$$\underbrace{V}_{1000 \times 500} \approx \underbrace{W}_{1000 \times 10} \times \underbrace{H}_{10 \times 500}$$
+
+## Mengapa Persamaan V ≈ W × H? {.unnumbered}
+
+Mari kita lihat dengan **contoh kecil**: Misalnya kita punya 3 dokumen dan 4 kata:
+
+$$V = \begin{bmatrix}
+2 & 3 & 0 & 1 \\
+1 & 1 & 4 & 2 \\
+3 & 2 & 1 & 0
+\end{bmatrix}$$
+
+NMF mencari:
+$$W = \begin{bmatrix}
+0.8 & 0.1 \\
+0.2 & 0.9 \\
+0.7 & 0.2
+\end{bmatrix}, \quad H = \begin{bmatrix}
+3 & 4 & 0 & 1 \\
+0 & 0 & 4 & 2
+\end{bmatrix}$$
+
+
+## Mengapa Persamaan V ≈ W × H? {.unnumbered}
+$$V = \begin{bmatrix}
+2 & 3 & 0 & 1 \\
+1 & 1 & 4 & 2 \\
+3 & 2 & 1 & 0
+\end{bmatrix}$$
+**V = Document–Term Matrix (DTM)**
+```{text}
+Baris = dokumen (3 dokumen)
+Kolom = kata (4 kata)
+Angka = frekuensi kata dalam dokumen
+
+#Contoh:
+Dokumen 1 punya 2 kali kata1, 3 kali kata2, 0 kata3, 1 kata4
+Dokumen 2 punya 1 kata1, 1 kata2, 4 kata3, 2 kata4
+Dokumen 3 punya 3 kata1, 2 kata2, 1 kata3, 0 kata4
+```
+
+## Mengapa Persamaan V ≈ W × H? {.unnumbered}
+NMF mencari:
+$$W = \begin{bmatrix}
+0.8 & 0.1 \\
+0.2 & 0.9 \\
+0.7 & 0.2
+\end{bmatrix}, \quad H = \begin{bmatrix}
+3 & 4 & 0 & 1 \\
+0 & 0 & 4 & 2
+\end{bmatrix}$$
+
+```{text}
+W = Document–Topic Matrix
+Baris = dokumen
+Kolom = topik (di sini dipilih 2 topik)
+Angka = seberapa besar dokumen tersebut terkait dengan topik
+
+#Contoh interpretasi:
+Dokumen 1 = [0.8, 0.1] → lebih dekat dengan Topik 1
+Dokumen 2 = [0.2, 0.9] → lebih dekat dengan Topik 2
+Dokumen 3 = [0.7, 0.2] → campuran, tapi lebih mirip Topik 1
+```
+
+
+## Mengapa Persamaan V ≈ W × H? {.unnumbered}
+NMF mencari:
+$$W = \begin{bmatrix}
+0.8 & 0.1 \\
+0.2 & 0.9 \\
+0.7 & 0.2
+\end{bmatrix}, \quad H = \begin{bmatrix}
+3 & 4 & 0 & 1 \\
+0 & 0 & 4 & 2
+\end{bmatrix}$$
+
+```{text}
+#H = Topic–Term Matrix
+Baris = topik
+Kolom = kata
+Angka = seberapa penting kata itu bagi topik tertentu
+
+Contoh interpretasi:
+Topik 1 → kata1 (3), kata2 (4), kata4 (1) → lebih condong ke kata1 & kata2
+Topik 2 → kata3 (4), kata4 (2) → lebih condong ke kata3
+```
+
+
+
+
+## Code Praktik Memahami NMF {.unnumbered}
+
+```{python}
+#! echo : false
+# Install dulu NLTK kalau belum ada
+# !pip install nltk scikit-learn
+
+import nltk
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+
+from sklearn.decomposition import NMF
+from sklearn.feature_extraction.text import CountVectorizer
+
+# 1. Kumpulan dokumen (lebih banyak, campuran makanan & olahraga)
+docs = [
+    "saya suka makan nasi goreng dan sate",
+    "nasi goreng enak dimakan dengan ayam",
+    "restoran ini menjual sate ayam dan nasi goreng",
+    "saya makan ayam goreng pakai sambal",
+    "tim sepak bola menang dalam pertandingan kemarin",
+    "sepak bola adalah olahraga populer di dunia",
+    "basket dan bola voli juga termasuk olahraga",
+    "pemain sepak bola mencetak gol ke gawang"
+]
+
+# 2. Ambil stopwords bahasa Indonesia dari NLTK
+stop_words_id = stopwords.words('indonesian')
+
+# 3. Ubah teks jadi matriks dokumen-kata (V)
+vectorizer = CountVectorizer(stop_words=stop_words_id)
+V = vectorizer.fit_transform(docs)
+
+print("Matriks V (dokumen x kata):")
+print(V.toarray())
+print("Daftar kata:", vectorizer.get_feature_names_out())
+
+# 4. Jalankan NMF dengan 2 topik
+nmf = NMF(n_components=2, random_state=42)
+W = nmf.fit_transform(V)   # dokumen-topik
+H = nmf.components_        # topik-kata
+
+print("\nMatriks W (dokumen-topik):")
+print(W)
+
+print("\nMatriks H (topik-kata):")
+print(H)
+
+# 5. Tampilkan kata penting tiap topik
+n_top_words = 5
+feature_names = vectorizer.get_feature_names_out()
+for topic_idx, topic in enumerate(H):
+    print(f"\nTopik {topic_idx+1}:")
+    top_features = topic.argsort()[::-1][:n_top_words]
+    print([feature_names[i] for i in top_features])
+```
+
+## Matriks V (dokumen × kata)
+```{text}
+Contoh baris:
+
+[0 0 0 0 0 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 1 0 1 0 0]
+
+Artinya:
+Baris ini = sebuah dokumen
+Kolom = kata tertentu (dari daftar kata)
+Angka = jumlah kemunculan kata
+
+Misalnya daftar kata = ['ayam', 'basket', 'bola', 'dimakan', ..., 'voli']
+Kolom ke-8 = "goreng" → nilainya 1 → kata goreng muncul sekali di dokumen ini
+Kolom ke-10 = "makan" → nilainya 1 → kata makan muncul sekali
+Kolom ke-14 = "nasi" → nilainya 1 → kata nasi muncul sekali
+Kolom ke-22 = "sate" → nilainya 1 → kata sate muncul sekali
+
+Jadi dokumen ini kira-kira berisi "makan nasi goreng sate" 
+→ cocok dengan tema makanan.
+```
+
+## Matriks W (dokumen–topik)
+```{text}
+[[0.6829 0.    ]
+ [0.6829 0.    ]
+ [0.8285 0.    ]
+ [0.5946 0.    ]
+ [0.     0.8749]
+ [0.     0.8282]
+ [0.     0.5246]
+ [0.     0.8749]]
+
+Interpretasi:
+Baris = dokumen
+Kolom = topik
+Angka = seberapa kuat dokumen itu terkait dengan topik tertentu
+
+Contoh:
+Dokumen 1–4 hanya punya angka di kolom 1 (Topik 1) → 
+ini adalah dokumen tentang makanan.
+Dokumen 5–8 hanya punya angka di kolom 2 (Topik 2) → 
+ini dokumen tentang olahraga.
+
+NMF berhasil memisahkan dokumen makanan vs olahraga dengan cukup jelas.
+```
+
+## Matriks H (topik–kata)
+
+```{text}
+Topik 1 (baris pertama H):
+['goreng', 'nasi', 'ayam', 'sate', 'makan']
+
+Topik 2 (baris kedua H):
+['bola', 'sepak', 'olahraga', 'mencetak', 'gol']
+
+Interpretasi:
+Baris = topik
+Kolom = kata
+Angka = bobot pentingnya kata di topik tersebut
+Hasilnya:
+
+Topik 1 → kata-kata pentingnya: "goreng", "nasi", "ayam", "sate", "makan"
+→ ini jelas menggambarkan topik makanan
+Topik 2 → kata-kata pentingnya: "bola", "sepak", "olahraga", "mencetak", "gol"
+→ ini jelas menggambarkan topik olahraga
+```
+
+## Kesimpulan dari Output
+
+```{text}
+Matriks V = data mentah (dokumen ke kata)
+Matriks W = peta dokumen ke topik
+Dokumen 1–4 → makanan
+Dokumen 5–8 → olahraga
+Matriks H = peta topik ke kata
+Topik 1 = makanan
+Topik 2 = olahraga
+
+Jadi NMF berhasil memecah dokumen campuran menjadi 2 kelompok
+topik yang bisa kita pahami secara manusiawi.
+```

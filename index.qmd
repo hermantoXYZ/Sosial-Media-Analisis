@@ -1,0 +1,33 @@
+---
+title: Sosial Media Analisis
+description: Documentation for Sosial Media Analisis
+---
+
+
+## Welcome {.unnumbered}
+::: {.callout-note}
+This website is under construction and will be regularly updated and extended.
+:::
+
+
+Website ini berisi penjelasan tentang Sosial Media Analisis Dikembangkan oleh [Andi Hermanto](https://andihermanto.id). Github: [hermantoXYZ/Sosial-Media-Analisis](https://github.com/hermantoXYZ/Sosial-Media-Analisis). 
+
+## Project team
+
+::: {.column}
+![Andi Hermanto](andi_hermanto.jpeg){width=60%}
+:::
+
+[Andi Hermanto](https://andihermanto.id/) Saat ini fokus dalam pengembangan Ekonomi Simulation dengan kosentrasi penelitian terkait Economic Finance and Development Finance
+
+## Contact
+We welcome any feedback. If you encounter any issues, find typos or mistakes, or have questions/thoughts on the content, please do get in touch.
+
+1. If you are Github user, you can [report an issue](https://github.com/hermantoXYZ#) in our repository  
+2. You can also email us directly: `a.hermanto@unm.ac.id`
+
+## Acknowledgements
+
+This project is developed by lecturers from the Faculty of Economics and Business, Universitas Negeri Makassar (FEB UNM), in collaboration with international researchers.  
+
+All errors are ours.

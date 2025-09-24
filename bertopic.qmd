@@ -1,0 +1,58 @@
+---
+title: "berTopic"
+format:
+  revealjs:
+    incremental: true   
+    code-block-height: 750px
+    slide-tone: true
+    progress: false
+    history: true
+    chalkboard: true
+---
+
+
+## berTopic 
+BERTopic adalah sebuah teknik pemodelan topik (topic modeling). Ini adalah pendekatan modern yang memanfaatkan model berbasis transformer (seperti BERT) dan clustering (pengelompokan) untuk menemukan topik-topik dalam data teks.
+
+::: {.callout-tip}
+BERTopic menggunakan pendekatan yang berbeda dan lebih intuitif dari LDA
+:::
+
+## Cara Kerja BERTopic
+
+Berbeda dengan model tradisional seperti Latent Dirichlet Allocation (LDA) yang menggunakan metode statistik untuk menemukan frekuensi kata, BERTopic menggunakan pendekatan yang berbeda dan lebih intuitif. Karena BERTopic menggunakan model berbasis transformer, ia dapat menangkap makna semantik dan konteks dari kata-kata dalam dokumen.
+
+
+## Proses BERTopic
+1.  **Menghasilkan *Embeddings***: Pertama, BERTopic mengubah dokumen menjadi representasi numerik (vektor atau *embedding*) menggunakan model bahasa pra-terlatih (*pre-trained*). Langkah ini sangat penting karena *embedding* ini menangkap makna dan konteks yang mendasari teks, bukan hanya kata-kata yang digunakan.
+
+2.  **Mengurangi Dimensi**: *Embedding* awal ini sangat kompleks. Untuk mempermudah pemrosesannya, BERTopic menggunakan algoritma yang disebut UMAP (Uniform Manifold Approximation and Projection).
+
+## Proses BERTopic
+3.  **Mengelompokkan Dokumen (*Clustering*)**: Dengan *embedding* yang telah disederhanakan, BERTopic kemudian menggunakan algoritma *clustering*.
+
+4.  **Mengekstrak Representasi Topik**: Terakhir, BERTopic menganalisis kata-kata di dalam setiap kelompok untuk menentukan topik utamanya. Model ini menggunakan skor *class-based TF-IDF* (c-TF-IDF) untuk menemukan kata-kata yang paling representatif dan penting untuk setiap topik.
+
+---
+
+## Perbandingan: BERTopic vs. LDA
+
+Berikut adalah tabel perbandingan antara BERTopic dengan model tradisional seperti LDA.
+
+| Fitur | BERTopic | Latent Dirichlet Allocation (LDA) |
+| :--- | :--- | :--- |
+| **Metode Dasar** | Menggunakan *embedding* kontekstual (BERT) dan *clustering*. | Menggunakan frekuensi kata statistik (pendekatan "bag-of-words"). |
+
+## Perbandingan: BERTopic vs. LDA
+
+| Fitur | BERTopic | Latent Dirichlet Allocation (LDA) |
+| :--- | :--- | :--- |
+| **Konteks** | Menangkap makna semantik dan konteks dari kata. | Memperlakukan dokumen sebagai kumpulan kata tanpa konteks. |
+| **Jumlah Topik** | Dapat secara otomatis menentukan jumlah topik yang optimal. | Mengharuskan Anda untuk menentukan jumlah topik di awal. |
+
+
+
+
+## Kesimpulan
+
+Singkatnya, BERTopic seringkali lebih efektif dalam menemukan topik yang koheren dan bermakna karena ia memahami **makna** dari teks, bukan hanya sekadar kata-kata yang terkandung di dalamnya.

@@ -1,0 +1,67 @@
+project:
+  type: website
+  output-dir: _site
+execute: 
+  warning: false
+  freeze: auto
+
+website:
+  title: "Sosial Media Analisis"
+  page-navigation: true
+  navbar: false
+  reader-mode: true
+  bread-crumbs: false
+  
+
+  page-footer:
+      left: |
+        An open-source platform for macroeconomic model simulation. 
+      right: |
+        <a>License: ...<a/> <a href="https://github.com/hermantoXYZ/Simulasi-Makro#">Source code</a>
+
+
+  sidebar:
+    style: "docked"
+    title: "Sosial Media Analisis"
+    search: true
+    numbered: true
+    
+    tools: 
+      - icon: twitter
+        href: https://twitter.com/hermantoXYZ
+      - icon: github
+        href: https://github.com/hermantoXYZ
+
+    contents:
+    - text: "Introduction"
+      href: index.qmd
+    - section: "Chapter IV"
+      contents:
+        - text: "Topic Modeling"
+          href: topic_modeling.qmd
+        - text: "LDA"
+          href: lda.qmd
+        - text: "NMF"
+          href: nmf.qmd
+        - text: "BERTopic"
+          href: bertopic.qmd
+        - text: "Generative AI"
+          href: generative_ai.qmd
+
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    toc-depth: 5
+    number-depth: 2
+    code-fold: true
+    code-summary: "Show code"
+    code-link: true
+    code-copy: true
+    number-sections: true
+    
+  
